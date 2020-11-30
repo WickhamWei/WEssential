@@ -1,0 +1,10 @@
+# zh_cn语言文件
+# 语言版本号
+language_version: 1
+# message是发送给玩家的信息，支持颜色代码‘&’
+message:
+  player_join_msg: ' 加入了游戏'
+  player_quit_msg: ' 离开了游戏'
+  home_null: '您还未设置家'
+# log是服务器后台信息，不支持颜色代码
+log:

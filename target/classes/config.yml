@@ -1,0 +1,10 @@
+# 配置文件版本号
+config_version: 1
+game_rules:
+  # 是否关闭苦力怕爆炸破坏地形
+  disable_creeper_explode_the_map: true
+  # 是否保护耕地不受踩踏
+  protect_farmland: true
+  # 在所有世界强制开启死亡不掉落及不掉经验的游戏规则
+  # 注意：开启后如需再次关闭这个功能，还需要在每个世界里操作一次游戏规则
+  keep_inventory_in_all_world: false

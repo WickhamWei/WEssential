@@ -1,0 +1,13 @@
+name: WEssential
+version: 1.0
+author: WickhamWei
+main: io.github.wickhamwei.wessential.WEssentialMain
+api-version: 1.16
+load: STARTUP
+commands:
+  home:
+    description: 回到床或者家的位置
+    usage: /<command>
+  sethome:
+    description: 设置家（会覆盖床的位置）
+    usage: /<command>
