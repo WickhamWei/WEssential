@@ -8,3 +8,6 @@ game_rules:
   # 在所有世界强制开启死亡不掉落及不掉经验的游戏规则
   # 注意：开启后如需再次关闭这个功能，还需要在每个世界里操作一次游戏规则
   keep_inventory_in_all_world: false
+wessential_setting:
+  # 语言文件
+  language_file: 'zh_cn.yml'

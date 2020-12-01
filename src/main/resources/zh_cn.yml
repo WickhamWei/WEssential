@@ -6,5 +6,8 @@ message:
   player_join_msg: ' 加入了游戏'
   player_quit_msg: ' 离开了游戏'
   home_null: '您还未设置家'
+  time_left_teleport: ' 秒后传送'
+  already_waiting_teleport: '您已经在等待传送中'
+  teleport_successful: '传送成功'
 # log是服务器后台信息，不支持颜色代码
 log:

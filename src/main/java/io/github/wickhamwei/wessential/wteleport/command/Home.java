@@ -18,7 +18,7 @@ public class Home implements CommandExecutor {
             if (playerHomeLocation == null) {
                 WEssentialMain.sendMessage(player, WEssentialMain.languageConfig.getConfig().getString("message.home_null"));
             } else {
-                new WTeleport(player, playerHomeLocation);
+                WTeleport.teleport(player, playerHomeLocation);
             }
             return true;
         }

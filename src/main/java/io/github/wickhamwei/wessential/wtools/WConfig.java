@@ -13,6 +13,7 @@ public class WConfig {
     public String fileName;
     public FileConfiguration configuration;
     public File configurationFile;
+    public final static String[] CONFIG_LIST = {"config.yml", "zh_cn.yml"};
 
     public WConfig(String fileNameString) {
         fileName = fileNameString;
@@ -23,9 +24,15 @@ public class WConfig {
         File file = new File(WEssentialMain.wEssentialMain.getDataFolder(), fileNameString);
         configurationFile = file;
         if (!file.exists()) {
-            WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileNameString + " 文件不存在，WEssential 将创建一个");
-            file.getParentFile().mkdirs();
-            WEssentialMain.wEssentialMain.saveResource(fileNameString, false);
+            for (int index = 0; index < CONFIG_LIST.length; index++) {
+                // 是用户自己创建的还是插件自带的config文件
+                if (CONFIG_LIST[index].equals(fileNameString)) {
+                    WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileNameString + " 文件不存在，WEssential 将创建一个");
+                    file.getParentFile().mkdirs();
+                    WEssentialMain.wEssentialMain.saveResource(fileNameString, false);
+                    break;
+                }
+            }
         }
         YamlConfiguration config = new YamlConfiguration();
         try {

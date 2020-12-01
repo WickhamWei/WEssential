@@ -47,19 +47,13 @@ public class WEssentialMain extends JavaPlugin {
 
     private void loadConfig() {
         this.saveDefaultConfig();
-        languageConfig = new WConfig("zh_cn.yml");
-//        languageConfig.getConfig().set("message.join_msg", " 加入了游戏");
-//        languageConfig.saveConfig();
+        languageConfig = new WConfig(getConfig().getString("wessential_setting.language_file"));
     }
 
     private void registerCommand(){
         getLogger().info("正在注册指令");
         this.getCommand("home").setExecutor(new Home());
         this.getCommand("sethome").setExecutor(new SetHome());
-    }
-
-    public FileConfiguration getMainConfig() {
-        return getConfig();
     }
 
     public void saveMainConfig() {
