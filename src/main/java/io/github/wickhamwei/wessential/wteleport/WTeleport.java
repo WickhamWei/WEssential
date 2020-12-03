@@ -17,7 +17,7 @@ public abstract class WTeleport {
             final String playerName = player.getName();
             final Location location = targetLocation;
 
-            BukkitRunnable countDownBukkitRunnable = new BukkitRunnable() {
+            BukkitRunnable teleportBukkitRunnable = new BukkitRunnable() {
                 int timeLeft = WEssentialMain.wEssentialMain.getConfig().getInt("teleport_setting.teleport_waiting_time");
 
                 @Override
@@ -37,6 +37,8 @@ public abstract class WTeleport {
                                 cancel();
                                 return;
                             }
+                        } else {
+                            cancel();
                         }
                     } else {
                         removeFromWaitingList(player);
@@ -44,11 +46,10 @@ public abstract class WTeleport {
                     }
                 }
             };
-            countDownBukkitRunnable.runTaskTimer(WEssentialMain.wEssentialMain, 0, 20);
+            teleportBukkitRunnable.runTaskTimer(WEssentialMain.wEssentialMain, 0, 20);
 
             int teleportTaskID = teleportBukkitRunnable.getTaskId();
-            int countDownTaskID = countDownBukkitRunnable.getTaskId();
-            addInWaitingList(player, teleportTaskID, countDownTaskID);
+            addInWaitingList(player, teleportTaskID);
         } else {
             WEssentialMain.sendMessage(player, WEssentialMain.languageConfig.getConfig().getString("message.already_waiting_teleport"));
         }
@@ -58,8 +59,8 @@ public abstract class WTeleport {
         player.teleport(targetPlayer, PlayerTeleportEvent.TeleportCause.PLUGIN);
     }
 
-    private static void addInWaitingList(Player player, int teleportTaskID, int countDownTaskID) {
-        TELEPORT_WAITING_LIST.put(player.getName(), new WTeleportPlayer(player.getName(), teleportTaskID, countDownTaskID));
+    private static void addInWaitingList(Player player, int teleportTaskID) {
+        TELEPORT_WAITING_LIST.put(player.getName(), new WTeleportPlayer(player.getName(), teleportTaskID));
     }
 
     private static boolean isInWaitingList(Player player) {
