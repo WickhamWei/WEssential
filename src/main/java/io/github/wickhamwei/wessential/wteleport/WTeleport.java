@@ -10,10 +10,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.util.HashMap;
 
 public abstract class WTeleport {
-    private static HashMap<String, WTeleportPlayer> TELEPORT_WAITING_LIST = new HashMap<String, WTeleportPlayer>();
+    private static HashMap<String, WTeleportPlayer> TELEPORT_WAITING_LIST = new HashMap<>();
 
     public static void teleport(Player player, Location targetLocation) {
-        if (!isInWaitingList(player)) {
+        if (getTaskIDInWaitingList(player) == 0) {
             final String playerName = player.getName();
             final Location location = targetLocation;
 
@@ -25,31 +25,28 @@ public abstract class WTeleport {
 
                     Player player = Bukkit.getPlayer(playerName);
                     if (player != null) {
-                        if (isInWaitingList(player)) {
+                        if (getTaskIDInWaitingList(player) == getTaskId()) {
                             if (timeLeft > 0) {
                                 WEssentialMain.sendMessage(player, timeLeft + WEssentialMain.languageConfig.getConfig().getString("message.time_left_teleport"));
                                 timeLeft--;
-                                return;
                             } else {
                                 player.teleport(location);
-                                removeFromWaitingList(player);
+                                removeFromWaitingList(playerName);
                                 WEssentialMain.sendMessage(player, WEssentialMain.languageConfig.getConfig().getString("message.teleport_successful"));
                                 cancel();
-                                return;
                             }
                         } else {
                             cancel();
                         }
                     } else {
-                        removeFromWaitingList(player);
+                        removeFromWaitingList(playerName);
                         cancel();
                     }
                 }
             };
             teleportBukkitRunnable.runTaskTimer(WEssentialMain.wEssentialMain, 0, 20);
-
-            int teleportTaskID = teleportBukkitRunnable.getTaskId();
-            addInWaitingList(player, teleportTaskID);
+            addInWaitingList(player, teleportBukkitRunnable.getTaskId());
+            // 总是获取到taskId以后，run()才开始执行
         } else {
             WEssentialMain.sendMessage(player, WEssentialMain.languageConfig.getConfig().getString("message.already_waiting_teleport"));
         }
@@ -63,11 +60,20 @@ public abstract class WTeleport {
         TELEPORT_WAITING_LIST.put(player.getName(), new WTeleportPlayer(player.getName(), teleportTaskID));
     }
 
-    private static boolean isInWaitingList(Player player) {
-        return TELEPORT_WAITING_LIST.containsKey(player.getName());
+    private static int getTaskIDInWaitingList(Player player) {
+        if (TELEPORT_WAITING_LIST.containsKey(player.getName())) {
+            WTeleportPlayer wTeleportPlayer = TELEPORT_WAITING_LIST.get(player.getName());
+            return wTeleportPlayer.teleportTaskID;
+        } else {
+            return 0;
+        }
     }
 
-    private static void removeFromWaitingList(Player player) {
-        TELEPORT_WAITING_LIST.remove(player.getName());
+    public static boolean removeFromWaitingList(String playerName) {
+        if (TELEPORT_WAITING_LIST.remove(playerName) == null) {
+            return false;
+        } else {
+            return true;
+        }
     }
 }

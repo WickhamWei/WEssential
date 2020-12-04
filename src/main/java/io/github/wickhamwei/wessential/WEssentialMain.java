@@ -3,6 +3,7 @@ package io.github.wickhamwei.wessential;
 import io.github.wickhamwei.wessential.eventlistener.*;
 import io.github.wickhamwei.wessential.wteleport.command.Home;
 import io.github.wickhamwei.wessential.wteleport.command.SetHome;
+import io.github.wickhamwei.wessential.wteleport.eventlistener.WTeleportPlayerMoveEventListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -33,6 +34,7 @@ public class WEssentialMain extends JavaPlugin {
         getLogger().info("正在注册事件");
         getServer().getPluginManager().registerEvents(new PlayerJoinEventListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerQuitEventListener(), this);
+        getServer().getPluginManager().registerEvents(new WTeleportPlayerMoveEventListener(), this);
         if (getConfig().getBoolean("game_rules.disable_creeper_explode_the_map")) {
             getLogger().info("关闭苦力怕爆炸地形破坏");
             getServer().getPluginManager().registerEvents(new EntityExplodeEventListener(), this);

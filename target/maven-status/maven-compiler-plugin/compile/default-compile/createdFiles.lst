@@ -10,4 +10,5 @@ io\github\wickhamwei\wessential\eventlistener\WorldInitEventListener.class
 io\github\wickhamwei\wessential\wteleport\command\Home.class
 io\github\wickhamwei\wessential\eventlistener\PlayerJoinEventListener.class
 io\github\wickhamwei\wessential\eventlistener\EntityExplodeEventListener.class
+io\github\wickhamwei\wessential\wteleport\eventlistener\WTeleportPlayerMoveEventListener.class
 io\github\wickhamwei\wessential\wtools\WConfig.class

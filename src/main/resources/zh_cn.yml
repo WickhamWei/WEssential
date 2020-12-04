@@ -10,5 +10,6 @@ message:
   time_left_teleport: '&e秒后传送'
   already_waiting_teleport: '&4您已经在等待传送中'
   teleport_successful: '&2传送成功'
+  teleport_interrupt: '&4您移动了，传送中断'
 # log是服务器后台信息，不支持颜色代码
 log:
