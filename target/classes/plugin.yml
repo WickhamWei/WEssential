@@ -7,7 +7,7 @@ load: STARTUP
 commands:
   home:
     description: 回到床或者家的位置
-    usage: /<command>
+    usage: /<command> [家的名字]
   sethome:
     description: 设置家（会覆盖床的位置）
-    usage: /<command>
+    usage: /<command> [家的名字]

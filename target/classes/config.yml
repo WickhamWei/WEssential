@@ -21,3 +21,6 @@ game_rules:
 teleport_setting:
   # 传送等待时间（秒）
   teleport_waiting_time: 5
+  # 最大额外家
+  # 除了默认的床位置可以 /home 返回，其他的家的数量
+  max_other_home: 1

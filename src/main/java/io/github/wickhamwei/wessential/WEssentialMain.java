@@ -15,6 +15,7 @@ import java.util.Objects;
 public class WEssentialMain extends JavaPlugin {
     public static WEssentialMain wEssentialMain;
     public static WConfig languageConfig;
+    public static WConfig homeLocationConfig;
 
     @Override
     public void onEnable() {
@@ -52,6 +53,7 @@ public class WEssentialMain extends JavaPlugin {
     private void loadConfig() {
         this.saveDefaultConfig();
         languageConfig = new WConfig(getConfig().getString("wessential_setting.language_file"));
+        homeLocationConfig = new WConfig("home.yml");
     }
 
     private void registerCommand() {

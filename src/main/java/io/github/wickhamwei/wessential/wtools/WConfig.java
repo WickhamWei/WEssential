@@ -13,7 +13,7 @@ public class WConfig {
     public String fileName;
     public FileConfiguration configuration;
     public File configurationFile;
-    public final static String[] CONFIG_LIST = {"config.yml", "zh_cn.yml"};
+    public final static String[] CONFIG_LIST = {"zh_cn.yml", "home.yml"};
 
     public WConfig(String fileNameString) {
         fileName = fileNameString;
