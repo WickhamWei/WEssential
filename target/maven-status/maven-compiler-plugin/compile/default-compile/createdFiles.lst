@@ -1,6 +1,7 @@
 io\github\wickhamwei\wessential\wteleport\command\SetHome.class
 io\github\wickhamwei\wessential\eventlistener\PlayerQuitEventListener.class
 io\github\wickhamwei\wessential\wteleport\WTeleportPlayer.class
+io\github\wickhamwei\wessential\wteleport\command\HomeList.class
 io\github\wickhamwei\wessential\wteleport\WTeleport.class
 io\github\wickhamwei\wessential\eventlistener\PlayerInteractEventListener.class
 io\github\wickhamwei\wessential\WEssentialMain.class

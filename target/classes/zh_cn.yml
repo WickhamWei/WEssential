@@ -14,6 +14,9 @@ message:
   teleport_interrupt: '&4您移动了，传送中断'
   home_cover: '&e即将覆盖家'
   no_more_home: '&4您设置的家已到数量上限，使用 /homelist 查看所有家，使用 /homeremove 移除'
+  no_home: '&e您未设置额外的家'
+  no_default_home: '&e您未设置默认的家'
+  home_location: ' &2的位置是 '
   error: '&4WEssential 出现问题，请联系服务器管理员'
 # log是服务器后台信息，不支持颜色代码
 log:

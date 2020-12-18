@@ -2,6 +2,7 @@ package io.github.wickhamwei.wessential;
 
 import io.github.wickhamwei.wessential.eventlistener.*;
 import io.github.wickhamwei.wessential.wteleport.command.Home;
+import io.github.wickhamwei.wessential.wteleport.command.HomeList;
 import io.github.wickhamwei.wessential.wteleport.command.SetHome;
 import io.github.wickhamwei.wessential.wteleport.eventlistener.WTeleportPlayerMoveEventListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
@@ -61,6 +62,7 @@ public class WEssentialMain extends JavaPlugin {
 
         Objects.requireNonNull(this.getCommand("home")).setExecutor(new Home());
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new SetHome());
+        Objects.requireNonNull(this.getCommand("homelist")).setExecutor(new HomeList());
 
     }
 
