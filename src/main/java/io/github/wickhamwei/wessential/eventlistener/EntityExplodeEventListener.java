@@ -11,8 +11,8 @@ public class EntityExplodeEventListener implements Listener {
     @EventHandler
     public void creeperExplode(EntityExplodeEvent event) {
         if (event.getEntityType().equals(EntityType.CREEPER)) {
+            event.getLocation().getWorld().playSound(event.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 0);
             event.setCancelled(true);
         }
-        event.getLocation().getWorld().playSound(event.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 0);
     }
 }
