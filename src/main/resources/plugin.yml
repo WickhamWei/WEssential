@@ -14,3 +14,6 @@ commands:
   homelist:
     description: 查看所有家的位置
     usage: /<command>
+  removehome:
+    description: 移除自定义的家
+    usage: /<command> <家的名字>

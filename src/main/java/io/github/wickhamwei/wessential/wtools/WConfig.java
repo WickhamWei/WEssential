@@ -29,11 +29,8 @@ public class WConfig {
                 // 是用户自己创建的还是插件自带的config文件
                 if (s.equals(fileNameString)) {
                     WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileNameString + " 文件不存在，WEssential 将创建一个");
-                    if (file.getParentFile().mkdirs()) {
-                        WEssentialMain.wEssentialMain.saveResource(fileNameString, false);
-                    } else {
-                        WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileNameString + " 文件所在文件夹创建失败");
-                    }
+//                    file.getParentFile().mkdirs();
+                    WEssentialMain.wEssentialMain.saveResource(fileNameString, false);
                     break;
                 }
             }
