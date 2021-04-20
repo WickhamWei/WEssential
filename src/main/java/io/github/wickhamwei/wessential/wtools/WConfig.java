@@ -10,10 +10,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 
 public class WConfig {
+    public static String[] DEFAULT_CONFIG_LIST = {"zh_cn.yml", "home.yml"};
+
     public String fileName;
     public FileConfiguration configuration;
     public File configurationFile;
-    public final static String[] CONFIG_LIST = {"zh_cn.yml", "home.yml"};
 
     public WConfig(String fileNameString) {
         fileName = fileNameString;
@@ -24,12 +25,15 @@ public class WConfig {
         File file = new File(WEssentialMain.wEssentialMain.getDataFolder(), fileNameString);
         configurationFile = file;
         if (!file.exists()) {
-            for (int index = 0; index < CONFIG_LIST.length; index++) {
+            for (String s : DEFAULT_CONFIG_LIST) {
                 // 是用户自己创建的还是插件自带的config文件
-                if (CONFIG_LIST[index].equals(fileNameString)) {
+                if (s.equals(fileNameString)) {
                     WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileNameString + " 文件不存在，WEssential 将创建一个");
-                    file.getParentFile().mkdirs();
-                    WEssentialMain.wEssentialMain.saveResource(fileNameString, false);
+                    if (file.getParentFile().mkdirs()) {
+                        WEssentialMain.wEssentialMain.saveResource(fileNameString, false);
+                    } else {
+                        WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileNameString + " 文件所在文件夹创建失败");
+                    }
                     break;
                 }
             }

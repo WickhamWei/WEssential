@@ -7,11 +7,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityExplodeEvent;
 
-public class EntityExplodeEventListener implements Listener {
+import java.util.Objects;
+
+public class CreeperListener implements Listener {
     @EventHandler
     public void creeperExplode(EntityExplodeEvent event) {
         if (event.getEntityType().equals(EntityType.CREEPER)) {
-            event.getLocation().getWorld().playSound(event.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 0);
+            Objects.requireNonNull(event.getLocation().getWorld()).playSound(event.getLocation(), Sound.ENTITY_GENERIC_EXPLODE, 1, 0);
             event.setCancelled(true);
         }
     }

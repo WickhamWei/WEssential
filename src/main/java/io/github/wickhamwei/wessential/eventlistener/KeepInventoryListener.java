@@ -7,7 +7,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.WorldInitEvent;
 
-public class WorldInitEventListener implements Listener {
+public class KeepInventoryListener implements Listener {
     @EventHandler
     public void keepInventory(WorldInitEvent event) {
         World world = event.getWorld();

@@ -11,7 +11,7 @@ message:
   time_left_teleport: '&e秒后传送'
   already_waiting_teleport: '&4您已经在等待传送中'
   teleport_successful: '&2传送成功'
-  teleport_interrupt: '&4您移动了，传送中断'
+  teleport_interrupt: '&4您受伤或移动了，传送中断'
   home_cover: '&e即将覆盖家'
   no_more_home: '&4您设置的家已到数量上限，使用 /homelist 查看所有家，使用 /homeremove 移除'
   no_home: '&e您未设置额外的家'

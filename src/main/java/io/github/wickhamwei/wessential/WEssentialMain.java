@@ -4,11 +4,8 @@ import io.github.wickhamwei.wessential.eventlistener.*;
 import io.github.wickhamwei.wessential.wteleport.command.Home;
 import io.github.wickhamwei.wessential.wteleport.command.HomeList;
 import io.github.wickhamwei.wessential.wteleport.command.SetHome;
-import io.github.wickhamwei.wessential.wteleport.eventlistener.WTeleportPlayerMoveEventListener;
+import io.github.wickhamwei.wessential.wteleport.eventlistener.TeleportInterruptListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -36,18 +33,17 @@ public class WEssentialMain extends JavaPlugin {
         getLogger().info("正在注册事件");
         getServer().getPluginManager().registerEvents(new PlayerJoinEventListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerQuitEventListener(), this);
-        getServer().getPluginManager().registerEvents(new WTeleportPlayerMoveEventListener(), this);
+        getServer().getPluginManager().registerEvents(new TeleportInterruptListener(), this);
         if (getConfig().getBoolean("game_rules.disable_creeper_explode_the_map")) {
             getLogger().info("关闭苦力怕爆炸地形破坏");
-            getServer().getPluginManager().registerEvents(new EntityExplodeEventListener(), this);
+            getServer().getPluginManager().registerEvents(new CreeperListener(), this);
         }
         if (getConfig().getBoolean("game_rules.protect_farmland")) {
             getLogger().info("保护耕地不受踩踏");
-            getServer().getPluginManager().registerEvents(new PlayerInteractEventListener(), this);
-            getServer().getPluginManager().registerEvents(new EntityInteractEventListener(), this);
+            getServer().getPluginManager().registerEvents(new FarmlandProtectListener(), this);
         }
         if (getConfig().getBoolean("game_rules.keep_inventory_in_all_world")) {
-            getServer().getPluginManager().registerEvents(new WorldInitEventListener(), this);
+            getServer().getPluginManager().registerEvents(new KeepInventoryListener(), this);
         }
     }
 
@@ -59,21 +55,10 @@ public class WEssentialMain extends JavaPlugin {
 
     private void registerCommand() {
         getLogger().info("正在注册指令");
-
         Objects.requireNonNull(this.getCommand("home")).setExecutor(new Home());
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new SetHome());
         Objects.requireNonNull(this.getCommand("homelist")).setExecutor(new HomeList());
 
     }
 
-    public void sendMessage(String playerName, String message) {
-        Player player = Bukkit.getPlayer(playerName);
-        if (player != null) {
-            sendMessage(player, message);
-        }
-    }
-
-    public static void sendMessage(Player player, String message) {
-        player.sendMessage(ChatColor.translateAlternateColorCodes('&', message));
-    }
 }
