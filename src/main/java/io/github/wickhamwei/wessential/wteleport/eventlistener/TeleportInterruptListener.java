@@ -14,8 +14,8 @@ public class TeleportInterruptListener implements Listener {
     @EventHandler
     public void onPlayerMove(PlayerMoveEvent event) {
         WPlayer player = WPlayer.getWPlayer(event.getPlayer().getName());
-        if (WTeleport.isInWaitingList(player)) {
-            WTeleport.removeFromWaitingList(player);
+        if (WTeleport.isTeleporting(player)) {
+            WTeleport.stopTeleporting(player);
             player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.teleport_interrupt"));
         }
     }
@@ -24,8 +24,8 @@ public class TeleportInterruptListener implements Listener {
     public void onPlayerDamaged(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             WPlayer player = WPlayer.getWPlayer(event.getEntity().getName());
-            if (WTeleport.isInWaitingList(player)) {
-                WTeleport.removeFromWaitingList(player);
+            if (WTeleport.isTeleporting(player)) {
+                WTeleport.stopTeleporting(player);
                 player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.teleport_interrupt"));
             }
         }

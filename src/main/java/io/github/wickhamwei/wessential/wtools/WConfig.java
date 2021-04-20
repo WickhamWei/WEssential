@@ -7,10 +7,13 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Level;
 
 public class WConfig {
     public static String[] DEFAULT_CONFIG_LIST = {"zh_cn.yml", "home.yml"};
+    public static Set<WConfig> configList = new HashSet<>();
 
     public String fileName;
     public FileConfiguration configuration;
@@ -42,6 +45,7 @@ public class WConfig {
             e.printStackTrace();
             WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileNameString + " 文件读取失败");
         }
+        configList.add(this);
         configuration = config;
     }
 
@@ -62,6 +66,7 @@ public class WConfig {
             e.printStackTrace();
             WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileName + " 文件读取失败");
         }
+        WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileName + " 文件重载成功");
         configuration = config;
     }
 

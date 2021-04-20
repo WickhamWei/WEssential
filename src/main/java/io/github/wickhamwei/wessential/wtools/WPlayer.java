@@ -25,6 +25,10 @@ public class WPlayer {
         return new WPlayer(playerName);
     }
 
+    public static boolean isOnline(String playerName) {
+        return Bukkit.getPlayer(playerName) != null;
+    }
+
     public String playerName;
 
     @Override
@@ -47,12 +51,11 @@ public class WPlayer {
 
     public WPlayer(String playerName) {
         this.playerName = playerName;
-        playerList.add(this);
+        if (isOnline(playerName)) {
+            playerList.add(this);
+        }
     }
 
-    public boolean isOnline() {
-        return Bukkit.getPlayer(playerName) != null;
-    }
 
     public String getName() {
         return playerName;
@@ -66,12 +69,17 @@ public class WPlayer {
         return getBukkitPlayer().getLocation();
     }
 
+    public boolean isOp() {
+        return getBukkitPlayer().isOp();
+    }
+
     public String getUniqueId() {
         return getBukkitPlayer().getUniqueId().toString();
     }
 
     public void exitGame() {
         playerList.remove(this);
+        WTeleport.stopTeleporting(this);
     }
 
     public void sendMessage(String message) {
@@ -79,38 +87,49 @@ public class WPlayer {
     }
 
     public void teleport(final Location targetLocation) {
-        if (WTeleport.getTaskId(this) == 0) {
+        if (isOp()) {
+            getBukkitPlayer().teleport(targetLocation);
+            return;
+        }
+        if (WTeleport.getCoolingTimeLeft(this) != 0) {
+            sendMessage(WTeleport.getCoolingTimeLeft(this) + WEssentialMain.languageConfig.getConfig().getString("message.time_cooling_teleport"));
+            return;
+        }
+        if (!WTeleport.isTeleporting(this)) {
             final WPlayer player = this;
             BukkitRunnable teleportBukkitRunnable = new BukkitRunnable() {
                 int timeLeft = WEssentialMain.wEssentialMain.getConfig().getInt("teleport_setting.teleport_waiting_time");
 
                 @Override
                 public void run() {
-                    if (player.isOnline()) {
-                        if (WTeleport.getTaskId(player) == getTaskId()) {
+                    if (isOnline(player.getName())) {
+                        if (WTeleport.isTeleporting(player)) {
                             if (timeLeft > 0) {
                                 player.sendMessage(timeLeft + WEssentialMain.languageConfig.getConfig().getString("message.time_left_teleport"));
                                 timeLeft--;
                             } else {
                                 player.getBukkitPlayer().teleport(targetLocation);
-                                WTeleport.removeFromWaitingList(player);
                                 player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.teleport_successful"));
+                                WTeleport.stopTeleporting(player);
+                                WTeleport.newTeleportCooling(player);
                                 cancel();
                             }
                         } else {
                             cancel();
                         }
                     } else {
-                        WTeleport.removeFromWaitingList(player);
+                        WTeleport.stopTeleporting(player);
                         cancel();
                     }
                 }
             };
             teleportBukkitRunnable.runTaskTimer(WEssentialMain.wEssentialMain, 0, 20);
-            WTeleport.addInWaitingList(player, teleportBukkitRunnable.getTaskId());
+            WTeleport.setTeleporting(player);
             // 总是获取到taskId以后，run()才开始执行
         } else {
             sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.already_waiting_teleport"));
         }
+
+
     }
 }

@@ -20,7 +20,11 @@ game_rules:
 # 传送设置
 teleport_setting:
   # 传送等待时间（秒）
+  # 管理员没有等待时间
   teleport_waiting_time: 5
+  # 传送冷却时间（秒）
+  # 管理员没有冷却时间
+  teleport_cooling_time: 60
   # 最大额外家
   # 除了默认的床位置可以 /home 返回，其他的家的数量
   max_other_home: 1

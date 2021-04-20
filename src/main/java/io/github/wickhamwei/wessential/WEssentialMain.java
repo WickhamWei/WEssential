@@ -1,10 +1,7 @@
 package io.github.wickhamwei.wessential;
 
 import io.github.wickhamwei.wessential.eventlistener.*;
-import io.github.wickhamwei.wessential.wteleport.command.Home;
-import io.github.wickhamwei.wessential.wteleport.command.HomeList;
-import io.github.wickhamwei.wessential.wteleport.command.RemoveHome;
-import io.github.wickhamwei.wessential.wteleport.command.SetHome;
+import io.github.wickhamwei.wessential.wteleport.command.*;
 import io.github.wickhamwei.wessential.wteleport.eventlistener.TeleportInterruptListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -20,7 +17,7 @@ public class WEssentialMain extends JavaPlugin {
     public void onEnable() {
         getLogger().info("欢迎使用 WEssential，作者 WickhamWei");
         wEssentialMain = this;
-        loadConfig();
+        loadAllConfig();
         registerEvents();
         registerCommand();
     }
@@ -48,11 +45,20 @@ public class WEssentialMain extends JavaPlugin {
         }
     }
 
-    private void loadConfig() {
+    private void loadAllConfig() {
         this.saveDefaultConfig();
+
         languageConfig = new WConfig(getConfig().getString("wessential_setting.language_file"));
         homeLocationConfig = new WConfig("home.yml");
     }
+
+//    public void reloadAllConfig() {
+//        getLogger().info("将重新载入配置文件，但某些设置需要重启才会生效！");
+//        this.reloadConfig();
+//        for (WConfig wConfig : WConfig.configList) {
+//            wConfig.reloadConfig();
+//        }
+//    }
 
     private void registerCommand() {
         getLogger().info("正在注册指令");
@@ -60,6 +66,7 @@ public class WEssentialMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new SetHome());
         Objects.requireNonNull(this.getCommand("homelist")).setExecutor(new HomeList());
         Objects.requireNonNull(this.getCommand("removehome")).setExecutor(new RemoveHome());
+        Objects.requireNonNull(this.getCommand("tpa")).setExecutor(new TeleportAdvanced());
     }
 
 }
