@@ -156,10 +156,26 @@ public class WPlayer {
 
     public boolean login(String password) {
         if (Objects.equals(WEssentialMain.passwordConfig.getConfig().getString(getName() + "." + "password"), WEncrypt.encrypt(password))) {
-            WLogin.addInLoginList(getName());
+            autoLogin();
             return true;
         } else {
             return false;
         }
+    }
+
+    public void autoLogin() {
+        WLogin.addInLoginList(getName());
+        WLogin.cleanLoginTimes(getName());
+        recordUserIP();
+    }
+
+    public void recordUserIP() {
+        WEssentialMain.passwordConfig.getConfig().set(getName() + "." + "IP", getIPAddress());
+        WEssentialMain.passwordConfig.getConfig().set(getName() + "." + "lastLoginTime", WTime.getTime());
+        WEssentialMain.passwordConfig.saveConfig();
+    }
+
+    public String getIPAddress() {
+        return Objects.requireNonNull(getBukkitPlayer().getAddress()).getAddress().getHostAddress();
     }
 }

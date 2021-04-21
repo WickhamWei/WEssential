@@ -30,7 +30,10 @@ message:
   login_already_login: '&e您已经登录了'
   login_and_register: '&2注册成功，已自动登录'
   login: '&2已登录'
+  login_auto: '&2欢迎回来，已为您自动登录'
   login_password_error: '&c密码错误，请重试'
+  login_change_password_successful: '&2修改密码成功'
+  login_fail: '密码错误次数过多，请 5 分钟后再试'
   back_null: '&c没有上一个位置可供传送'
   home_cover: '&e即将覆盖家'
   no_more_home: '&c您设置的家已到数量上限，使用 /homelist 查看所有家，使用 /removehome 移除'
@@ -42,3 +45,4 @@ message:
   op_only: '&c这个 WEssential 命令仅限管理员使用'
 # log是服务器后台信息，不支持颜色代码
 log:
+  password_error: ' 密码输入错误'

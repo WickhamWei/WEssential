@@ -1,9 +1,10 @@
 package io.github.wickhamwei.wessential;
 
 import io.github.wickhamwei.wessential.eventlistener.*;
+import io.github.wickhamwei.wessential.wlogin.command.ChangePassword;
 import io.github.wickhamwei.wessential.wlogin.command.Login;
 import io.github.wickhamwei.wessential.wlogin.command.Register;
-import io.github.wickhamwei.wessential.wlogin.eventlistener.UnloginListener;
+import io.github.wickhamwei.wessential.wlogin.eventlistener.UnLoginListener;
 import io.github.wickhamwei.wessential.wteleport.command.*;
 import io.github.wickhamwei.wessential.wteleport.eventlistener.TeleportInterruptListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
@@ -50,7 +51,7 @@ public class WEssentialMain extends JavaPlugin {
         }
         if (isWLoginEnable()) {
             getLogger().info("WLogin 登录系统已启用");
-            getServer().getPluginManager().registerEvents(new UnloginListener(), this);
+            getServer().getPluginManager().registerEvents(new UnLoginListener(), this);
         }
     }
 
@@ -82,6 +83,7 @@ public class WEssentialMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("back")).setExecutor(new Back());
         Objects.requireNonNull(this.getCommand("register")).setExecutor(new Register());
         Objects.requireNonNull(this.getCommand("login")).setExecutor(new Login());
+        Objects.requireNonNull(this.getCommand("changepassword")).setExecutor(new ChangePassword());
     }
 
     public static boolean isWLoginEnable() {

@@ -10,11 +10,14 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class PlayerQuitEventListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        String message = WEssentialMain.languageConfig.getConfig().getString("message.player_quit_msg");
-        if (message != null) {
-            event.setQuitMessage(ChatColor.YELLOW + event.getPlayer().getName() + ChatColor.translateAlternateColorCodes('&', message));
+        if (WPlayer.isOnline(event.getPlayer().getName())) {
+            String message = WEssentialMain.languageConfig.getConfig().getString("message.player_quit_msg");
+            if (message != null) {
+                event.setQuitMessage(ChatColor.YELLOW + event.getPlayer().getName() + ChatColor.translateAlternateColorCodes('&', message));
+            }
+        } else {
+            event.setQuitMessage("");
         }
-        WPlayer player = WPlayer.getWPlayer(event.getPlayer().getName());
-        player.exitGame();
+        WPlayer.getWPlayer(event.getPlayer().getName()).exitGame();
     }
 }

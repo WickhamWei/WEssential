@@ -32,3 +32,6 @@ commands:
   login:
     description: 登录
     usage: /<command> <密码>
+  changepassword:
+    description: 修改密码
+    usage: /<command> <新密码> <重复一遍新密码>

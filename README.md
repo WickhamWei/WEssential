@@ -10,7 +10,7 @@
   ```/login <密码>```
 
 * 修改密码
-  ```/changePassword <密码>```
+  ```/changePassword <密码> <密码>```
 
 ### Home
 * 回到家的位置
