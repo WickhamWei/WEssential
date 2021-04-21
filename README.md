@@ -1,7 +1,7 @@
 # WEssential
 轻量化的类Essential插件，作者Wickham
 ## 指令
-### HOME
+### Home
 * 回到家的位置
 ```/home [家的名称]```
 
@@ -12,7 +12,15 @@
 ```/homelist```
 
 * 移除家
-```/removehome [家的名称]```
+```/removehome [家的名称]```  
+  
+### Teleport
+* 请求传送到某人
+```/tpa <玩家名称>```
+
+* 接受某人的传送请求
+```/tpaccept```
+  
 ## 配置文件及默认值
 ### config.yml
 #### config_version:
@@ -27,11 +35,13 @@
 是否保护耕地不受踩踏：```protect_farmland: true```   
 
 在所有世界强制开启死亡不掉落及不掉经验的游戏规则   
-注意：开启后如需再次关闭这个功能，还需要在每个世界里操作一次游戏规则  
+注意：开启后如需关闭这个功能，还需要在每个世界里关闭一次此游戏规则  
 ```keep_inventory_in_all_world: false```
 
 #### teleport_setting:
 传送等待时间（秒）：```teleport_waiting_time: 5```
+
+传送冷却时间（秒）：```teleport_cooling_time: 5```
 
 最大额外家  
 除了默认的床位置可以 /home 返回，其他的家的数量：```max_other_home: 1```

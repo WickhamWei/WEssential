@@ -91,12 +91,12 @@ public class WTeleport {
         return teleportUnderRequestList.containsKey(targetPlayer.getName());
     }
 
-    public static String getTargetPlayerName(WPlayer mainPlayer) {
-        return teleportRequestList.get(mainPlayer.getName());
+    public static WPlayer getTargetPlayer(WPlayer mainPlayer) {
+        return WPlayer.getWPlayer(teleportRequestList.get(mainPlayer.getName()));
     }
 
-    public static String getMainPlayerName(WPlayer targetPlayer) {
-        return teleportUnderRequestList.get(targetPlayer.getName());
+    public static WPlayer getMainPlayer(WPlayer targetPlayer) {
+        return WPlayer.getWPlayer(teleportUnderRequestList.get(targetPlayer.getName()));
     }
 
     private static void newTeleportRequestTask(final WPlayer mainPlayer, final WPlayer targetPlayer) {

@@ -20,3 +20,6 @@ commands:
   tpa:
     description: 请求传送到某人
     usage: /<command> <玩家的名字>
+  tpaccept:
+    description: 接受传送请求
+    usage: /<command>

@@ -8,10 +8,12 @@ io\github\wickhamwei\wessential\wteleport\command\HomeList.class
 io\github\wickhamwei\wessential\wteleport\WTeleport.class
 io\github\wickhamwei\wessential\WEssentialMain.class
 io\github\wickhamwei\wessential\wteleport\WTeleport$1.class
+io\github\wickhamwei\wessential\wteleport\WTeleport$2.class
 io\github\wickhamwei\wessential\eventlistener\CreeperListener.class
 io\github\wickhamwei\wessential\wteleport\command\Home.class
 io\github\wickhamwei\wessential\eventlistener\PlayerJoinEventListener.class
 io\github\wickhamwei\wessential\wtools\WPlayer$1.class
 io\github\wickhamwei\wessential\wteleport\command\TeleportAdvanced.class
 io\github\wickhamwei\wessential\wtools\WConfig.class
+io\github\wickhamwei\wessential\wteleport\command\TeleportAccept.class
 io\github\wickhamwei\wessential\wteleport\eventlistener\TeleportInterruptListener.class

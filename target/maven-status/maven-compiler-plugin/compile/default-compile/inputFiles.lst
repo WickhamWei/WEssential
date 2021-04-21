@@ -8,7 +8,9 @@ C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessenti
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\eventlistener\KeepInventoryListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\HomeList.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\RemoveHome.java
+C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\TeleportAdvanced.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\eventlistener\TeleportInterruptListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\eventlistener\FarmlandProtectListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wtools\WConfig.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\SetHome.java
+C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\TeleportAccept.java

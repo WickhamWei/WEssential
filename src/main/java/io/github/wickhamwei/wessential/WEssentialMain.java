@@ -67,6 +67,7 @@ public class WEssentialMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("homelist")).setExecutor(new HomeList());
         Objects.requireNonNull(this.getCommand("removehome")).setExecutor(new RemoveHome());
         Objects.requireNonNull(this.getCommand("tpa")).setExecutor(new TeleportAdvanced());
+        Objects.requireNonNull(this.getCommand("tpaccept")).setExecutor(new TeleportAccept());
     }
 
 }
