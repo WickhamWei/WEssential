@@ -23,3 +23,12 @@ commands:
   tpaccept:
     description: 接受传送请求
     usage: /<command>
+  back:
+    description: 回到上一个位置
+    usage: /<command>
+  register:
+    description: 注册
+    usage: /<command> <密码> <重复一遍密码>
+  login:
+    description: 登录
+    usage: /<command> <密码>

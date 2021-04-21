@@ -2,12 +2,12 @@ package io.github.wickhamwei.wessential.wteleport;
 
 import io.github.wickhamwei.wessential.WEssentialMain;
 import io.github.wickhamwei.wessential.wtools.WPlayer;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class WTeleport {
     public static Set<String> teleportingList = new HashSet<>();
@@ -126,5 +126,33 @@ public class WTeleport {
             }
         };
         teleportBukkitRunnable.runTaskTimer(WEssentialMain.wEssentialMain, 0, 20);
+    }
+
+    public static void setBackLocation(WPlayer player, Location location) {
+        String playerUniqueId = player.getUniqueId();
+        String world = Objects.requireNonNull(location.getWorld()).getName();
+        double X = Math.floor(location.getX());
+        double Y = Math.floor(location.getY());
+        double Z = Math.floor(location.getZ());
+        WEssentialMain.backLocationConfig.getConfig().set(playerUniqueId + ".world", world);
+        WEssentialMain.backLocationConfig.getConfig().set(playerUniqueId + ".X", X);
+        WEssentialMain.backLocationConfig.getConfig().set(playerUniqueId + ".Y", Y);
+        WEssentialMain.backLocationConfig.getConfig().set(playerUniqueId + ".Z", Z);
+        WEssentialMain.backLocationConfig.saveConfig();
+    }
+
+    public static Location getBackLocation(WPlayer player) {
+        String playerUniqueId = player.getUniqueId();
+        if (WEssentialMain.backLocationConfig.getConfig().contains(playerUniqueId)) {
+            String worldString = WEssentialMain.backLocationConfig.getConfig().getString(playerUniqueId + ".world");
+            assert worldString != null;
+            World world = Bukkit.getWorld(worldString);
+            double X = WEssentialMain.backLocationConfig.getConfig().getDouble(playerUniqueId + ".X");
+            double Y = WEssentialMain.backLocationConfig.getConfig().getDouble(playerUniqueId + ".Y");
+            double Z = WEssentialMain.backLocationConfig.getConfig().getDouble(playerUniqueId + ".Z");
+            return new Location(world, X, Y, Z);
+        } else {
+            return null;
+        }
     }
 }

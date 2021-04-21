@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 public class WConfig {
-    public static String[] DEFAULT_CONFIG_LIST = {"zh_cn.yml", "home.yml"};
+    public static String[] DEFAULT_CONFIG_LIST = {"zh_cn.yml", "home.yml", "back.yml", "password.yml"};
     public static Set<WConfig> configList = new HashSet<>();
 
     public String fileName;
@@ -58,17 +58,17 @@ public class WConfig {
         }
     }
 
-    public void reloadConfig() {
-        YamlConfiguration config = new YamlConfiguration();
-        try {
-            config.load(configurationFile);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-            WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileName + " 文件读取失败");
-        }
-        WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileName + " 文件重载成功");
-        configuration = config;
-    }
+//    public void reloadConfig() {
+//        YamlConfiguration config = new YamlConfiguration();
+//        try {
+//            config.load(configurationFile);
+//        } catch (IOException | InvalidConfigurationException e) {
+//            e.printStackTrace();
+//            WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileName + " 文件读取失败");
+//        }
+//        WEssentialMain.wEssentialMain.getLogger().log(Level.WARNING, fileName + " 文件重载成功");
+//        configuration = config;
+//    }
 
     public FileConfiguration getConfig() {
         return configuration;

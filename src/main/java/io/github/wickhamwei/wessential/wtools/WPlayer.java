@@ -1,6 +1,7 @@
 package io.github.wickhamwei.wessential.wtools;
 
 import io.github.wickhamwei.wessential.WEssentialMain;
+import io.github.wickhamwei.wessential.wlogin.WLogin;
 import io.github.wickhamwei.wessential.wteleport.WTeleport;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -26,7 +27,15 @@ public class WPlayer {
     }
 
     public static boolean isOnline(String playerName) {
-        return Bukkit.getPlayer(playerName) != null;
+        if (WEssentialMain.isWLoginEnable()) {
+            if (Bukkit.getPlayer(playerName) != null) {
+                return WLogin.isInLoginList(playerName);
+            } else {
+                return false;
+            }
+        } else {
+            return Bukkit.getPlayer(playerName) != null;
+        }
     }
 
     public String playerName;
@@ -79,7 +88,9 @@ public class WPlayer {
 
     public void exitGame() {
         playerList.remove(this);
-        WTeleport.stopTeleporting(this);
+        if (WEssentialMain.isWLoginEnable()) {
+            WLogin.removeFromLoginList(this.getName());
+        }
     }
 
     public void sendMessage(String message) {
@@ -88,6 +99,7 @@ public class WPlayer {
 
     public void teleport(final Location targetLocation) {
         if (isOp()) {
+            WTeleport.setBackLocation(this, this.getLocation());
             getBukkitPlayer().teleport(targetLocation);
             return;
         }
@@ -108,6 +120,7 @@ public class WPlayer {
                                 player.sendMessage(timeLeft + WEssentialMain.languageConfig.getConfig().getString("message.time_left_teleport"));
                                 timeLeft--;
                             } else {
+                                WTeleport.setBackLocation(player, player.getLocation());
                                 player.getBukkitPlayer().teleport(targetLocation);
                                 player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.teleport_successful"));
                                 WTeleport.stopTeleporting(player);
@@ -129,7 +142,24 @@ public class WPlayer {
         } else {
             sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.already_waiting_teleport"));
         }
+    }
 
+    public boolean isRegister() {
+        return WEssentialMain.passwordConfig.getConfig().contains(getName() + "." + "password");
+    }
 
+    public void changePassword(String newPassword) {
+        WEssentialMain.passwordConfig.getConfig().set(getName() + "." + "password", WEncrypt.encrypt(newPassword));
+        WEssentialMain.passwordConfig.saveConfig();
+        WLogin.addInLoginList(getName());
+    }
+
+    public boolean login(String password) {
+        if (Objects.equals(WEssentialMain.passwordConfig.getConfig().getString(getName() + "." + "password"), WEncrypt.encrypt(password))) {
+            WLogin.addInLoginList(getName());
+            return true;
+        } else {
+            return false;
+        }
     }
 }

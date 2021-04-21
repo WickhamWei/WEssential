@@ -1,6 +1,9 @@
 package io.github.wickhamwei.wessential;
 
 import io.github.wickhamwei.wessential.eventlistener.*;
+import io.github.wickhamwei.wessential.wlogin.command.Login;
+import io.github.wickhamwei.wessential.wlogin.command.Register;
+import io.github.wickhamwei.wessential.wlogin.eventlistener.UnloginListener;
 import io.github.wickhamwei.wessential.wteleport.command.*;
 import io.github.wickhamwei.wessential.wteleport.eventlistener.TeleportInterruptListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
@@ -12,6 +15,8 @@ public class WEssentialMain extends JavaPlugin {
     public static WEssentialMain wEssentialMain;
     public static WConfig languageConfig;
     public static WConfig homeLocationConfig;
+    public static WConfig backLocationConfig;
+    public static WConfig passwordConfig;
 
     @Override
     public void onEnable() {
@@ -43,6 +48,10 @@ public class WEssentialMain extends JavaPlugin {
         if (getConfig().getBoolean("game_rules.keep_inventory_in_all_world")) {
             getServer().getPluginManager().registerEvents(new KeepInventoryListener(), this);
         }
+        if (isWLoginEnable()) {
+            getLogger().info("WLogin 登录系统已启用");
+            getServer().getPluginManager().registerEvents(new UnloginListener(), this);
+        }
     }
 
     private void loadAllConfig() {
@@ -50,6 +59,8 @@ public class WEssentialMain extends JavaPlugin {
 
         languageConfig = new WConfig(getConfig().getString("wessential_setting.language_file"));
         homeLocationConfig = new WConfig("home.yml");
+        backLocationConfig = new WConfig("back.yml");
+        passwordConfig = new WConfig("password.yml");
     }
 
 //    public void reloadAllConfig() {
@@ -68,6 +79,12 @@ public class WEssentialMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("removehome")).setExecutor(new RemoveHome());
         Objects.requireNonNull(this.getCommand("tpa")).setExecutor(new TeleportAdvanced());
         Objects.requireNonNull(this.getCommand("tpaccept")).setExecutor(new TeleportAccept());
+        Objects.requireNonNull(this.getCommand("back")).setExecutor(new Back());
+        Objects.requireNonNull(this.getCommand("register")).setExecutor(new Register());
+        Objects.requireNonNull(this.getCommand("login")).setExecutor(new Login());
     }
 
+    public static boolean isWLoginEnable() {
+        return WEssentialMain.wEssentialMain.getConfig().getBoolean("login_setting.enable_login_system");
+    }
 }

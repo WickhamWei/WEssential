@@ -7,6 +7,11 @@ wessential_setting:
   # 语言文件
   language_file: 'zh_cn.yml'
 
+# 登录系统 设置
+login_setting:
+  # 启用注册、登录系统
+  enable_login_system: true
+
 # 游戏规则
 game_rules:
   # 是否关闭苦力怕爆炸破坏地形
