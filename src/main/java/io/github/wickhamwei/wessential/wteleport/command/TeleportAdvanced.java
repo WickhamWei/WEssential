@@ -1,6 +1,7 @@
 package io.github.wickhamwei.wessential.wteleport.command;
 
 import io.github.wickhamwei.wessential.WEssentialMain;
+import io.github.wickhamwei.wessential.wteleport.WTeleport;
 import io.github.wickhamwei.wessential.wtools.WPlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -19,10 +20,23 @@ public class TeleportAdvanced implements CommandExecutor {
                 String targetPlayerName = strings[0];
                 if (WPlayer.isOnline(targetPlayerName)) {
                     WPlayer targetPlayer = WPlayer.getWPlayer(targetPlayerName);
+
+                    // 对方有无正在等待其他人传送
+                    if(WTeleport.isUnderRequest(targetPlayer)){
+                        player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.teleport_request_target_busy"));
+                        return true;
+                    }
+
+                    // 自己有无正在等待其他人回复
+                    if(WTeleport.isInRequest(player)){
+                        player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.teleport_request_main_busy"));
+                        return true;
+                    }
+
                     player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.teleport_request_sent_to") + targetPlayerName);
                     targetPlayer.sendMessage("&e" + playerName + WEssentialMain.languageConfig.getConfig().getString("message.teleport_request_sb_to_you"));
 
-                    //to do
+                    WTeleport.newTeleportRequest(player,targetPlayer);
                 } else {
                     player.sendMessage("&e" + targetPlayerName + " " + WEssentialMain.languageConfig.getConfig().getString("message.teleport_target_player_null"));
                 }
