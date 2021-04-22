@@ -21,7 +21,7 @@ public class WEssentialMain extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        getLogger().info("欢迎使用 WEssential，作者 WickhamWei");
+        getLogger().info("欢迎使用 WEssential，作者 WickhamWei阿华");
         wEssentialMain = this;
         loadAllConfig();
         registerEvents();
@@ -39,11 +39,11 @@ public class WEssentialMain extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerQuitEventListener(), this);
         getServer().getPluginManager().registerEvents(new TeleportInterruptListener(), this);
         if (getConfig().getBoolean("game_rules.disable_creeper_explode_the_map")) {
-            getLogger().info("关闭苦力怕爆炸地形破坏");
+            getLogger().info("已应用游戏规则：关闭苦力怕爆炸地形破坏");
             getServer().getPluginManager().registerEvents(new CreeperListener(), this);
         }
         if (getConfig().getBoolean("game_rules.protect_farmland")) {
-            getLogger().info("保护耕地不受踩踏");
+            getLogger().info("已应用游戏规则：保护耕地不受踩踏");
             getServer().getPluginManager().registerEvents(new FarmlandProtectListener(), this);
         }
         if (getConfig().getBoolean("game_rules.keep_inventory_in_all_world")) {
@@ -84,6 +84,7 @@ public class WEssentialMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("register")).setExecutor(new Register());
         Objects.requireNonNull(this.getCommand("login")).setExecutor(new Login());
         Objects.requireNonNull(this.getCommand("changepassword")).setExecutor(new ChangePassword());
+        Objects.requireNonNull(this.getCommand("tpall")).setExecutor(new TeleportAll());
     }
 
     public static boolean isWLoginEnable() {

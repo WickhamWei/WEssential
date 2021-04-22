@@ -1,5 +1,7 @@
 # WEssential
-轻量化的类Essential插件，作者Wickham
+轻量化的类Essential插件，作者 Wickham阿华。
+### 意见与建议
+如果有想要的功能或者待修复的Bug，请随意向此项目发起Issue。
 ## 指令
 
 ### Login
@@ -23,7 +25,7 @@
 ```/homelist```
 
 * 移除家
-```/removehome [家的名称]```  
+```/removehome <家的名称>```  
   
 ### Teleport
 * 请求传送到某人
@@ -34,6 +36,9 @@
 
 * 回到上一个位置
   ```/back```
+
+* 传送所有人到身边（OP）
+  ```/tpall```
   
 ## 配置文件及默认值
 ### config.yml

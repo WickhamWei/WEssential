@@ -17,6 +17,9 @@ commands:
   removehome:
     description: 移除自定义的家
     usage: /<command> <家的名字>
+  tpall:
+    description: 传送所有人到您身边（OP）
+    usage: /<command>
   tpa:
     description: 请求传送到某人
     usage: /<command> <玩家的名字>

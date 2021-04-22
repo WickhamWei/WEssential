@@ -23,7 +23,7 @@ public class Home implements CommandExecutor {
                 if (playerHomeLocation == null) {
                     player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.home_null"));
                 } else {
-                    player.teleport(playerHomeLocation);
+                    player.teleport(playerHomeLocation, false);
                 }
                 return true;
             } else if (strings.length == 1) {
@@ -41,7 +41,7 @@ public class Home implements CommandExecutor {
                         double Y = WEssentialMain.homeLocationConfig.getConfig().getDouble(playerUniqueId + "." + strings[0] + ".Y");
                         double Z = WEssentialMain.homeLocationConfig.getConfig().getDouble(playerUniqueId + "." + strings[0] + ".Z");
                         Location location = new Location(world, X, Y, Z);
-                        player.teleport(location);
+                        player.teleport(location, false);
                     }
                 } else {
                     player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.home_null") + " " + strings[0]);

@@ -97,10 +97,13 @@ public class WPlayer {
         getBukkitPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&', message));
     }
 
-    public void teleport(final Location targetLocation) {
-        if (isOp()) {
+    public void teleport(final Location targetLocation, boolean immediately) {
+        if (isOp() || immediately) {
             WTeleport.setBackLocation(this, this.getLocation());
             getBukkitPlayer().teleport(targetLocation);
+            WTeleport.stopTeleporting(this);
+            WTeleport.stopTeleportCooling(this);
+            WTeleport.stopTeleportRequest(this);
             return;
         }
         if (WTeleport.getCoolingTimeLeft(this) != 0) {

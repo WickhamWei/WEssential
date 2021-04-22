@@ -17,7 +17,7 @@ public class TeleportAccept implements CommandExecutor {
             if (strings.length == 0) {
                 if (WTeleport.isUnderRequest(player)) {
                     WPlayer requsetPlayer = WTeleport.getMainPlayer(player);
-                    requsetPlayer.teleport(player.getLocation());
+                    requsetPlayer.teleport(player.getLocation(),false);
                     WTeleport.stopTeleportRequest(requsetPlayer, player);
                     player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.teleport_request_accept"));
                     return true;

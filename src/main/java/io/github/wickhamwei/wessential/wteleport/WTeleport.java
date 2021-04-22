@@ -83,6 +83,10 @@ public class WTeleport {
         teleportUnderRequestList.remove(targetPlayer.getName());
     }
 
+    public static void stopTeleportRequest(WPlayer mainPlayer) {
+        teleportUnderRequestList.remove(teleportRequestList.remove(mainPlayer.getName()));
+    }
+
     public static boolean isInRequest(WPlayer mainPlayer) {
         return teleportRequestList.containsKey(mainPlayer.getName());
     }
