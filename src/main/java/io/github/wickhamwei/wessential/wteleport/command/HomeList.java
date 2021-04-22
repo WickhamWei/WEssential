@@ -22,7 +22,7 @@ public class HomeList implements CommandExecutor {
             WPlayer player = WPlayer.getWPlayer(playerName);
             if (strings.length == 0) {
                 // homelist
-                String playerUniqueId = player.getUniqueId();
+                String playerUniqueId = player.getBukkitPlayer().getUniqueId().toString();
                 Location playerHomeLocation = player.getBukkitPlayer().getBedSpawnLocation();
                 Set<String> playerHomeList = new HashSet<>();
                 ConfigurationSection configurationSection = WEssentialMain.homeLocationConfig.getConfig().getConfigurationSection(playerUniqueId);

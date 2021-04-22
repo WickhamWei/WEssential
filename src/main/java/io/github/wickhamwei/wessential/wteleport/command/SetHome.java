@@ -27,7 +27,7 @@ public class SetHome implements CommandExecutor {
                 return true;
             } else if (strings.length == 1) {
                 // sethome <家名称>
-                String playerUniqueId = player.getUniqueId();
+                String playerUniqueId = player.getBukkitPlayer().getUniqueId().toString();
                 if (!WEssentialMain.homeLocationConfig.getConfig().contains(playerUniqueId)) {
                     WEssentialMain.homeLocationConfig.getConfig().set(playerUniqueId, "");
                 }

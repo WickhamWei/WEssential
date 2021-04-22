@@ -28,7 +28,7 @@ public class Home implements CommandExecutor {
                 return true;
             } else if (strings.length == 1) {
                 // home <家名称>
-                String playerUniqueId = player.getUniqueId();
+                String playerUniqueId = player.getBukkitPlayer().getUniqueId().toString();
                 if (WEssentialMain.homeLocationConfig.getConfig().contains(playerUniqueId + "." + strings[0])) {
                     String worldString = WEssentialMain.homeLocationConfig.getConfig().getString(playerUniqueId + "." + strings[0] + ".world");
                     assert worldString != null;

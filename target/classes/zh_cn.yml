@@ -23,6 +23,7 @@ message:
   teleport_request_target_refuse: '&e您拒绝了对方的请求'
   teleport_request_accept_null: '&c没有需要答应的传送请求'
   teleport_request_accept: '&2已答应请求，对方将在稍后传送'
+  teleport_all: '&2已将所有人传送到您身边'
   login_not_register: '&c您还未注册，请输入 /register 密码 重复密码 来注册'
   login_not_login: '&c您还未登录，请输入 /login 密码 来登录'
   login_not_enable: '&cWLogin 登录系统未启用'
@@ -43,6 +44,11 @@ message:
   home_location: ' &2的位置是 '
   error: '&cWEssential 出现问题，请联系服务器管理员'
   op_only: '&c这个 WEssential 命令仅限管理员使用'
+  w_protect_chest_lock: '&2上锁成功'
+  w_protect_chest_already_lock: '&e此箱子已经被锁上了'
+  w_protect_chest_already_lock_by_you: '&2此箱子已经被您锁上了'
+  w_protect_chest_not_owner: '&e此箱子的主人是 '
+  w_protect_chest_unlock: '&e此箱子已解锁'
 # log是服务器后台信息，不支持颜色代码
 log:
   password_error: ' 密码输入错误'

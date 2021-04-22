@@ -16,7 +16,7 @@ public class RemoveHome implements CommandExecutor {
             WPlayer player = WPlayer.getWPlayer(playerName);
             if (strings.length == 1) {
                 // removeHome <家名称>
-                String playerUniqueId = player.getUniqueId();
+                String playerUniqueId = player.getBukkitPlayer().getUniqueId().toString();
                 if (!WEssentialMain.homeLocationConfig.getConfig().contains(playerUniqueId)) {
                     WEssentialMain.homeLocationConfig.getConfig().set(playerUniqueId, "");
                 }

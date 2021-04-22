@@ -44,6 +44,11 @@ message:
   home_location: ' &2的位置是 '
   error: '&cWEssential 出现问题，请联系服务器管理员'
   op_only: '&c这个 WEssential 命令仅限管理员使用'
+  w_protect_chest_lock: '&2上锁成功'
+  w_protect_chest_already_lock: '&e此箱子已经被其他人锁上了'
+  w_protect_chest_already_lock_by_you: '&2此箱子已经被您锁上了'
+  w_protect_chest_not_owner: '&e此箱子的主人是 '
+  w_protect_chest_unlock: '&e此箱子已解锁'
 # log是服务器后台信息，不支持颜色代码
 log:
   password_error: ' 密码输入错误'

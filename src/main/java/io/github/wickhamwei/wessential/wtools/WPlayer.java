@@ -5,6 +5,7 @@ import io.github.wickhamwei.wessential.wlogin.WLogin;
 import io.github.wickhamwei.wessential.wteleport.WTeleport;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -82,10 +83,6 @@ public class WPlayer {
         return getBukkitPlayer().isOp();
     }
 
-    public String getUniqueId() {
-        return getBukkitPlayer().getUniqueId().toString();
-    }
-
     public void exitGame() {
         playerList.remove(this);
         if (WEssentialMain.isWLoginEnable()) {
@@ -154,7 +151,7 @@ public class WPlayer {
     public void changePassword(String newPassword) {
         WEssentialMain.passwordConfig.getConfig().set(getName() + "." + "password", WEncrypt.encrypt(newPassword));
         WEssentialMain.passwordConfig.saveConfig();
-        WLogin.addInLoginList(getName());
+        autoLogin();
     }
 
     public boolean login(String password) {
@@ -167,6 +164,7 @@ public class WPlayer {
     }
 
     public void autoLogin() {
+        getBukkitPlayer().setGameMode(GameMode.SURVIVAL);
         WLogin.addInLoginList(getName());
         WLogin.cleanLoginTimes(getName());
         recordUserIP();

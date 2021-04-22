@@ -5,6 +5,10 @@ import io.github.wickhamwei.wessential.wlogin.command.ChangePassword;
 import io.github.wickhamwei.wessential.wlogin.command.Login;
 import io.github.wickhamwei.wessential.wlogin.command.Register;
 import io.github.wickhamwei.wessential.wlogin.eventlistener.UnLoginListener;
+import io.github.wickhamwei.wessential.wprotect.eventlistener.ChestBreakListener;
+import io.github.wickhamwei.wessential.wprotect.eventlistener.ChestLockListener;
+import io.github.wickhamwei.wessential.wprotect.eventlistener.OpenChestListener;
+import io.github.wickhamwei.wessential.wprotect.eventlistener.SignBreakListener;
 import io.github.wickhamwei.wessential.wteleport.command.*;
 import io.github.wickhamwei.wessential.wteleport.eventlistener.TeleportInterruptListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
@@ -18,6 +22,7 @@ public class WEssentialMain extends JavaPlugin {
     public static WConfig homeLocationConfig;
     public static WConfig backLocationConfig;
     public static WConfig passwordConfig;
+    public static WConfig wProtectConfig;
 
     @Override
     public void onEnable() {
@@ -47,12 +52,18 @@ public class WEssentialMain extends JavaPlugin {
             getServer().getPluginManager().registerEvents(new FarmlandProtectListener(), this);
         }
         if (getConfig().getBoolean("game_rules.keep_inventory_in_all_world")) {
+            getLogger().info("已应用游戏规则：在所有世界启用死亡不掉落");
             getServer().getPluginManager().registerEvents(new KeepInventoryListener(), this);
         }
         if (isWLoginEnable()) {
             getLogger().info("WLogin 登录系统已启用");
             getServer().getPluginManager().registerEvents(new UnLoginListener(), this);
         }
+
+        getServer().getPluginManager().registerEvents(new ChestLockListener(), this);
+        getServer().getPluginManager().registerEvents(new OpenChestListener(), this);
+        getServer().getPluginManager().registerEvents(new SignBreakListener(), this);
+        getServer().getPluginManager().registerEvents(new ChestBreakListener(), this);
     }
 
     private void loadAllConfig() {
@@ -62,6 +73,7 @@ public class WEssentialMain extends JavaPlugin {
         homeLocationConfig = new WConfig("home.yml");
         backLocationConfig = new WConfig("back.yml");
         passwordConfig = new WConfig("password.yml");
+        wProtectConfig = new WConfig("w_protect.yml");
     }
 
 //    public void reloadAllConfig() {

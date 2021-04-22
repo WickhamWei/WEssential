@@ -133,7 +133,7 @@ public class WTeleport {
     }
 
     public static void setBackLocation(WPlayer player, Location location) {
-        String playerUniqueId = player.getUniqueId();
+        String playerUniqueId = player.getBukkitPlayer().getUniqueId().toString();
         String world = Objects.requireNonNull(location.getWorld()).getName();
         double X = Math.floor(location.getX());
         double Y = Math.floor(location.getY());
@@ -146,7 +146,7 @@ public class WTeleport {
     }
 
     public static Location getBackLocation(WPlayer player) {
-        String playerUniqueId = player.getUniqueId();
+        String playerUniqueId = player.getBukkitPlayer().getUniqueId().toString();
         if (WEssentialMain.backLocationConfig.getConfig().contains(playerUniqueId)) {
             String worldString = WEssentialMain.backLocationConfig.getConfig().getString(playerUniqueId + ".world");
             assert worldString != null;
