@@ -2,6 +2,7 @@ package io.github.wickhamwei.wessential.wprotect.eventlistener;
 
 import io.github.wickhamwei.wessential.WEssentialMain;
 import io.github.wickhamwei.wessential.wprotect.WProtect;
+import io.github.wickhamwei.wessential.wresidence.WResidence;
 import io.github.wickhamwei.wessential.wtools.WPlayer;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -28,6 +29,11 @@ public class ChestLockListener implements Listener {
                     if (event.getBlockFace() == BlockFace.EAST || event.getBlockFace() == BlockFace.SOUTH || event.getBlockFace() == BlockFace.WEST || event.getBlockFace() == BlockFace.NORTH) {
                         Block targetBlock = event.getClickedBlock().getRelative(event.getBlockFace());
                         if (targetBlock.getType() == Material.AIR) {
+
+                            if (WResidence.isStopEventInResidence(WPlayer.getWPlayer(event.getPlayer().getName()), event.getClickedBlock())) {
+                                return;
+                            }
+
                             if (WProtect.lockChest(player, event.getClickedBlock())) {
                                 targetBlock.setType(Material.OAK_WALL_SIGN);
                                 if (targetBlock.getState() instanceof Sign) {

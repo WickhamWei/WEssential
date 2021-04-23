@@ -28,7 +28,6 @@ public class ChestBreakListener implements Listener {
                         WPlayer.getWPlayer(e.getPlayer().getName()).sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_unlock"));
                     }
                 }
-
             }
         }
     }

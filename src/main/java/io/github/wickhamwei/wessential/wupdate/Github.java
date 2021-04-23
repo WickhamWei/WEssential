@@ -1,4 +1,4 @@
-package io.github.wickhamwei.wessential.WUpdateChecker;
+package io.github.wickhamwei.wessential.wupdate;
 
 import com.google.gson.annotations.SerializedName;
 

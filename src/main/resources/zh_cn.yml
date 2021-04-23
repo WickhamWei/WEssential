@@ -1,6 +1,6 @@
 # zh_cn语言文件
 # 语言版本号
-language_version: 1.0
+language_version: 1.1
 # message是发送给玩家的信息，支持颜色代码‘&’
 message:
   player_join_msg: ' 加入了游戏'
@@ -61,6 +61,15 @@ message:
   w_minors_list: '&e被设置为未成年人的玩家有：'
   w_minors_list_null: '&e没有人被设置为未成年人'
   w_minors_kick: '此时间是未成年游戏限制时间，请明天再来:)'
+  w_residence_first_print_set: '第一个点位于 '
+  w_residence_second_print_set: '第二个点位于 '
+  w_residence_set: ' 领地设置完成'
+  w_residence_set_fail: '&c领地设置失败，请确认您已经使用木棍鼠标左右键选中两个合法的点'
+  w_residence_disable_event: '&c 不允许进行这个行为'
+  w_residence_all: '&e您的领地有 '
+  w_residence_no_more: '&e您没有设置领地'
+  w_residence_remove: '&e 已被移除'
+  w_residence_unknown: '&c 不存在'
 # log是服务器后台信息，不支持颜色代码
 log:
   password_error: ' 密码输入错误'

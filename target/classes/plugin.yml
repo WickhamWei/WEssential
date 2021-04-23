@@ -1,5 +1,5 @@
 name: WEssential
-version: 1.0
+version: 1.1
 author: WickhamWei
 main: io.github.wickhamwei.wessential.WEssentialMain
 api-version: 1.16
@@ -53,3 +53,12 @@ commands:
   removeminors:
     description: 将玩家取消设置为未成年人
     usage: /<command> <玩家名字> [玩家名字]...
+  setres:
+    description: 用木棍左右键选中两个地点后，设置领地
+    usage: /<command> <领地名字>
+  reslist:
+    description: 您的所有领地
+    usage: /<command>
+  removeres:
+    description: 移除领地
+    usage: /<command> <领地名字>

@@ -1,8 +1,10 @@
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wtools\WEncrypt.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\eventlistener\ServerListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wlogin\command\Login.java
+C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wresidence\WResidence.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\eventlistener\PlayerJoinEventListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\Back.java
+C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wresidence\command\SetRes.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wlogin\command\ChangePassword.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wlogin\command\Register.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\eventlistener\PlayerQuitEventListener.java
@@ -12,6 +14,7 @@ C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessenti
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wminors\eventlistener\MessageListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\RemoveHome.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\eventlistener\TeleportInterruptListener.java
+C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wupdate\Github.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\eventlistener\FarmlandProtectListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\TeleportAll.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wprotect\eventlistener\ChestLockListener.java
@@ -19,12 +22,14 @@ C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessenti
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wlogin\WLogin.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wprotect\eventlistener\SignBreakListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wtools\WPlayer.java
+C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wresidence\eventlistener\ChoosePointListener.java
+C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wupdate\WUpdateChecker.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wlogin\eventlistener\UnLoginListener.java
+C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wresidence\eventlistener\ResidenceProtectListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\Home.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wprotect\WProtect.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\WEssentialMain.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wminors\WMinors.java
-C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\WUpdateChecker\Github.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\eventlistener\CreeperListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wminors\eventlistener\CheckMinorsListener.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\WTeleport.java
@@ -37,5 +42,4 @@ C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessenti
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\SetHome.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wteleport\command\TeleportAccept.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wminors\command\RemoveMinors.java
-C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\WUpdateChecker\WUpdateChecker.java
 C:\Users\WCH\IdeaProjects\WEssential\src\main\java\io\github\wickhamwei\wessential\wtools\WTime.java

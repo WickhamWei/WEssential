@@ -1,4 +1,4 @@
-package io.github.wickhamwei.wessential.WUpdateChecker;
+package io.github.wickhamwei.wessential.wupdate;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -15,6 +15,11 @@ import io.github.wickhamwei.wessential.wprotect.eventlistener.ChestBreakListener
 import io.github.wickhamwei.wessential.wprotect.eventlistener.ChestLockListener;
 import io.github.wickhamwei.wessential.wprotect.eventlistener.OpenChestListener;
 import io.github.wickhamwei.wessential.wprotect.eventlistener.SignBreakListener;
+import io.github.wickhamwei.wessential.wresidence.command.RemoveRes;
+import io.github.wickhamwei.wessential.wresidence.command.ResList;
+import io.github.wickhamwei.wessential.wresidence.command.SetRes;
+import io.github.wickhamwei.wessential.wresidence.eventlistener.ChoosePointListener;
+import io.github.wickhamwei.wessential.wresidence.eventlistener.ResidenceProtectListener;
 import io.github.wickhamwei.wessential.wteleport.command.*;
 import io.github.wickhamwei.wessential.wteleport.eventlistener.TeleportInterruptListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
@@ -31,9 +36,10 @@ public class WEssentialMain extends JavaPlugin {
     public static WConfig passwordConfig;
     public static WConfig chestProtectConfig;
     public static WConfig minorsPlayerConfig;
+    public static WConfig residenceConfig;
 
     public static final String ConfigVersion = "1.0";
-    public static final String languageVersion = "1.0";
+    public static final String languageVersion = "1.1";
     public static final String url = "https://api.github.com/repos/WickhamWei/WEssential/releases/latest";
 
     @Override
@@ -83,6 +89,9 @@ public class WEssentialMain extends JavaPlugin {
         }
 
         getServer().getPluginManager().registerEvents(new ServerListener(), this);
+
+        getServer().getPluginManager().registerEvents(new ChoosePointListener(), this);
+        getServer().getPluginManager().registerEvents(new ResidenceProtectListener(), this);
     }
 
     private void loadAllConfig() {
@@ -94,6 +103,8 @@ public class WEssentialMain extends JavaPlugin {
         passwordConfig = new WConfig("password.yml");
         chestProtectConfig = new WConfig("chest.yml");
         minorsPlayerConfig = new WConfig("minors.yml");
+
+        // 有部分配置文件在ServerListener中加载
     }
 
 //    public void reloadAllConfig() {
@@ -121,6 +132,9 @@ public class WEssentialMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("isminors")).setExecutor(new IsMinors());
         Objects.requireNonNull(this.getCommand("minorsList")).setExecutor(new MinorsList());
         Objects.requireNonNull(this.getCommand("removeminors")).setExecutor(new RemoveMinors());
+        Objects.requireNonNull(this.getCommand("setres")).setExecutor(new SetRes());
+        Objects.requireNonNull(this.getCommand("reslist")).setExecutor(new ResList());
+        Objects.requireNonNull(this.getCommand("removeres")).setExecutor(new RemoveRes());
     }
 
     public static boolean isWLoginEnable() {
