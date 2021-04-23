@@ -5,6 +5,7 @@ import io.github.wickhamwei.wessential.wlogin.command.ChangePassword;
 import io.github.wickhamwei.wessential.wlogin.command.Login;
 import io.github.wickhamwei.wessential.wlogin.command.Register;
 import io.github.wickhamwei.wessential.wlogin.eventlistener.UnLoginListener;
+import io.github.wickhamwei.wessential.wprotect.command.Add;
 import io.github.wickhamwei.wessential.wprotect.eventlistener.ChestBreakListener;
 import io.github.wickhamwei.wessential.wprotect.eventlistener.ChestLockListener;
 import io.github.wickhamwei.wessential.wprotect.eventlistener.OpenChestListener;
@@ -22,7 +23,7 @@ public class WEssentialMain extends JavaPlugin {
     public static WConfig homeLocationConfig;
     public static WConfig backLocationConfig;
     public static WConfig passwordConfig;
-    public static WConfig wProtectConfig;
+    public static WConfig chestProtectConfig;
 
     @Override
     public void onEnable() {
@@ -73,7 +74,7 @@ public class WEssentialMain extends JavaPlugin {
         homeLocationConfig = new WConfig("home.yml");
         backLocationConfig = new WConfig("back.yml");
         passwordConfig = new WConfig("password.yml");
-        wProtectConfig = new WConfig("w_protect.yml");
+        chestProtectConfig = new WConfig("chest.yml");
     }
 
 //    public void reloadAllConfig() {
@@ -97,6 +98,7 @@ public class WEssentialMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("login")).setExecutor(new Login());
         Objects.requireNonNull(this.getCommand("changepassword")).setExecutor(new ChangePassword());
         Objects.requireNonNull(this.getCommand("tpall")).setExecutor(new TeleportAll());
+        Objects.requireNonNull(this.getCommand("add")).setExecutor(new Add());
     }
 
     public static boolean isWLoginEnable() {

@@ -49,6 +49,11 @@ message:
   w_protect_chest_already_lock_by_you: '&2此箱子已经被您锁上了'
   w_protect_chest_not_owner: '&e此箱子的主人是 '
   w_protect_chest_unlock: '&e此箱子已解锁'
+  w_protect_chest_unknown: '&e目标箱子已丢失或更换主人，请重新使用橡木牌选择箱子'
+  w_protect_chest_user_add: '&e 已有箱子的使用权限'
+  w_protect_chest_select: '&e此箱子已被选中，可使用 /add <玩家名字> 添加用户'
+  w_protect_chest_all_user: '&e此箱子除了您以外的用户有 '
+  w_protect_chest_no_more_user: '&e此箱子除了您以外没有人能打开'
 # log是服务器后台信息，不支持颜色代码
 log:
   password_error: ' 密码输入错误'

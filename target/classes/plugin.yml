@@ -38,3 +38,6 @@ commands:
   changepassword:
     description: 修改密码
     usage: /<command> <新密码> <重复一遍新密码>
+  add:
+    description: 给箱子添加新用户
+    usage: /<command> <玩家名字> [玩家名字]...

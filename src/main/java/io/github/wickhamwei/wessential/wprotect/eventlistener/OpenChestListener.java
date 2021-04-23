@@ -11,6 +11,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerInteractEvent;
 
+import java.util.Set;
+
 public class OpenChestListener implements Listener {
     @EventHandler
     public void onPlayerOpenChest(PlayerInteractEvent event) {
@@ -21,8 +23,11 @@ public class OpenChestListener implements Listener {
                 String chestOwnerName = WProtect.getChestOwnerName(targetBlock);
                 if (chestOwnerName != null) {
                     if (!player.getName().equals(chestOwnerName)) {
-                        event.setCancelled(true);
-                        player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_not_owner") + chestOwnerName);
+                        Set<String> moreUsers = WProtect.getMoreUsers(targetBlock);
+                        if (!moreUsers.contains(player.getName())) {
+                            event.setCancelled(true);
+                            player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_not_owner") + chestOwnerName);
+                        }
                     }
                 }
             }
