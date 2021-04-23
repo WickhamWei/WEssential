@@ -9,8 +9,8 @@ import org.bukkit.event.server.ServerLoadEvent;
 public class ServerListener implements Listener {
     @EventHandler
     public void serverLoadDone(ServerLoadEvent event) {
-        String nowPluginVersion = "v" + WEssentialMain.wEssentialMain.getDescription().getVersion();
-        WEssentialMain.logInfo("WEssential " + nowPluginVersion + " 加载完成");
+        String nowPluginVersion = WEssentialMain.wEssentialMain.getDescription().getVersion();
+        WEssentialMain.logInfo("WEssential v" + nowPluginVersion + " 加载完成");
         String nowPluginConfigVersion = WEssentialMain.wEssentialMain.getConfig().getString("config_version");
         String nowLanguageVersion = WEssentialMain.languageConfig.getConfig().getString("language_version");
         assert nowPluginConfigVersion != null;
@@ -28,8 +28,8 @@ public class ServerListener implements Listener {
             if (updateChecker.getNewestVersionString().equals(nowPluginVersion)) {
                 WEssentialMain.logInfo("WEssential 已是最新版本");
             } else {
-                WEssentialMain.logInfo("WEssential 当前版本为 " + nowPluginVersion);
-                WEssentialMain.logInfo("WEssential 最新版本为 " + updateChecker.getNewestVersionString() + " 发布于 "
+                WEssentialMain.logInfo("WEssential 当前版本为 v" + nowPluginVersion);
+                WEssentialMain.logInfo("WEssential 最新版本为 v" + updateChecker.getNewestVersionString() + " 发布于 "
                         + updateChecker.getNewestVersionPTimeString());
                 WEssentialMain.logInfo("请及时更新");
             }
