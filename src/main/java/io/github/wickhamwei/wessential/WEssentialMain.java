@@ -5,6 +5,11 @@ import io.github.wickhamwei.wessential.wlogin.command.ChangePassword;
 import io.github.wickhamwei.wessential.wlogin.command.Login;
 import io.github.wickhamwei.wessential.wlogin.command.Register;
 import io.github.wickhamwei.wessential.wlogin.eventlistener.UnLoginListener;
+import io.github.wickhamwei.wessential.wminors.command.IsMinors;
+import io.github.wickhamwei.wessential.wminors.command.MinorsList;
+import io.github.wickhamwei.wessential.wminors.command.RemoveMinors;
+import io.github.wickhamwei.wessential.wminors.command.SetMinors;
+import io.github.wickhamwei.wessential.wminors.eventlistener.MessageListener;
 import io.github.wickhamwei.wessential.wprotect.command.Add;
 import io.github.wickhamwei.wessential.wprotect.eventlistener.ChestBreakListener;
 import io.github.wickhamwei.wessential.wprotect.eventlistener.ChestLockListener;
@@ -13,6 +18,7 @@ import io.github.wickhamwei.wessential.wprotect.eventlistener.SignBreakListener;
 import io.github.wickhamwei.wessential.wteleport.command.*;
 import io.github.wickhamwei.wessential.wteleport.eventlistener.TeleportInterruptListener;
 import io.github.wickhamwei.wessential.wtools.WConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
@@ -24,6 +30,11 @@ public class WEssentialMain extends JavaPlugin {
     public static WConfig backLocationConfig;
     public static WConfig passwordConfig;
     public static WConfig chestProtectConfig;
+    public static WConfig minorsPlayerConfig;
+
+    public static final String ConfigVersion = "1.0";
+    public static final String languageVersion = "1.0";
+    public static final String url = "https://api.github.com/repos/WickhamWei/WEssential/releases/latest";
 
     @Override
     public void onEnable() {
@@ -40,7 +51,11 @@ public class WEssentialMain extends JavaPlugin {
     }
 
     private void registerEvents() {
-        getLogger().info("正在注册事件");
+        if (isWLoginEnable()) {
+            getLogger().info("WLogin 登录系统已启用");
+            getServer().getPluginManager().registerEvents(new UnLoginListener(), this);
+        }
+
         getServer().getPluginManager().registerEvents(new PlayerJoinEventListener(), this);
         getServer().getPluginManager().registerEvents(new PlayerQuitEventListener(), this);
         getServer().getPluginManager().registerEvents(new TeleportInterruptListener(), this);
@@ -56,15 +71,18 @@ public class WEssentialMain extends JavaPlugin {
             getLogger().info("已应用游戏规则：在所有世界启用死亡不掉落");
             getServer().getPluginManager().registerEvents(new KeepInventoryListener(), this);
         }
-        if (isWLoginEnable()) {
-            getLogger().info("WLogin 登录系统已启用");
-            getServer().getPluginManager().registerEvents(new UnLoginListener(), this);
-        }
 
         getServer().getPluginManager().registerEvents(new ChestLockListener(), this);
         getServer().getPluginManager().registerEvents(new OpenChestListener(), this);
         getServer().getPluginManager().registerEvents(new SignBreakListener(), this);
         getServer().getPluginManager().registerEvents(new ChestBreakListener(), this);
+//        getServer().getPluginManager().registerEvents(new CheckMinorsListener(), this);
+
+        if (getConfig().getBoolean("minors_setting.enable_shield")) {
+            getServer().getPluginManager().registerEvents(new MessageListener(), this);
+        }
+
+        getServer().getPluginManager().registerEvents(new ServerListener(), this);
     }
 
     private void loadAllConfig() {
@@ -75,6 +93,7 @@ public class WEssentialMain extends JavaPlugin {
         backLocationConfig = new WConfig("back.yml");
         passwordConfig = new WConfig("password.yml");
         chestProtectConfig = new WConfig("chest.yml");
+        minorsPlayerConfig = new WConfig("minors.yml");
     }
 
 //    public void reloadAllConfig() {
@@ -86,7 +105,6 @@ public class WEssentialMain extends JavaPlugin {
 //    }
 
     private void registerCommand() {
-        getLogger().info("正在注册指令");
         Objects.requireNonNull(this.getCommand("home")).setExecutor(new Home());
         Objects.requireNonNull(this.getCommand("sethome")).setExecutor(new SetHome());
         Objects.requireNonNull(this.getCommand("homelist")).setExecutor(new HomeList());
@@ -99,9 +117,21 @@ public class WEssentialMain extends JavaPlugin {
         Objects.requireNonNull(this.getCommand("changepassword")).setExecutor(new ChangePassword());
         Objects.requireNonNull(this.getCommand("tpall")).setExecutor(new TeleportAll());
         Objects.requireNonNull(this.getCommand("add")).setExecutor(new Add());
+        Objects.requireNonNull(this.getCommand("setminors")).setExecutor(new SetMinors());
+        Objects.requireNonNull(this.getCommand("isminors")).setExecutor(new IsMinors());
+        Objects.requireNonNull(this.getCommand("minorsList")).setExecutor(new MinorsList());
+        Objects.requireNonNull(this.getCommand("removeminors")).setExecutor(new RemoveMinors());
     }
 
     public static boolean isWLoginEnable() {
         return WEssentialMain.wEssentialMain.getConfig().getBoolean("login_setting.enable_login_system");
+    }
+
+    public static void logInfo(String string) {
+        Bukkit.getServer().getLogger().info("[WEssential] " + string);
+    }
+
+    public static void logWarning(String string) {
+        Bukkit.getServer().getLogger().warning("[WEssential] " + string);
     }
 }

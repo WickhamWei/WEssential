@@ -12,7 +12,7 @@ import java.util.Set;
 import java.util.logging.Level;
 
 public class WConfig {
-    public static String[] DEFAULT_CONFIG_LIST = {"zh_cn.yml", "home.yml", "back.yml", "password.yml", "chest.yml"};
+    public static String[] DEFAULT_CONFIG_LIST = {"zh_cn.yml", "home.yml", "back.yml", "password.yml", "chest.yml", "minors.yml"};
     public static Set<WConfig> configList = new HashSet<>();
 
     public String fileName;

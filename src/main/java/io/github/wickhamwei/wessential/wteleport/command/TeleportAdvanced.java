@@ -19,7 +19,7 @@ public class TeleportAdvanced implements CommandExecutor {
                 if (targetPlayerName.equals(playerName)) {
                     return false;
                 }
-                if (WPlayer.isOnline(targetPlayerName)) {
+                if (WPlayer.isLogin(targetPlayerName)) {
                     WPlayer targetPlayer = WPlayer.getWPlayer(targetPlayerName);
 
                     if (WTeleport.getCoolingTimeLeft(player) != 0) {

@@ -41,3 +41,15 @@ commands:
   add:
     description: 给箱子添加新用户
     usage: /<command> <玩家名字> [玩家名字]...
+  setminors:
+    description: 将用户设置为未成年
+    usage: /<command> <玩家名字> [玩家名字]...
+  isminors:
+    description: 用户是否在未成年列表内
+    usage: /<command> <玩家名字>
+  minorslist:
+    description: 查看被设置成未成年的玩家列表
+    usage: /<command>
+  removeminors:
+    description: 将玩家取消设置为未成年人
+    usage: /<command> <玩家名字> [玩家名字]...

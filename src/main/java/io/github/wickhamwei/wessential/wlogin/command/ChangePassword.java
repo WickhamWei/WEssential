@@ -16,7 +16,7 @@ public class ChangePassword implements CommandExecutor {
             if (WEssentialMain.isWLoginEnable()) {
                 if (strings.length == 2) {
                     if (player.isRegister()) {
-                        if (WPlayer.isOnline(playerName)) {
+                        if (WPlayer.isLogin(playerName)) {
                             if (strings[0].equals(strings[1])) {
                                 player.changePassword(strings[0]);
                                 player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.login_change_password_successful"));

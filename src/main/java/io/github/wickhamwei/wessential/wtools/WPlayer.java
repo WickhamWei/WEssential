@@ -27,7 +27,7 @@ public class WPlayer {
         return new WPlayer(playerName);
     }
 
-    public static boolean isOnline(String playerName) {
+    public static boolean isLogin(String playerName) {
         if (WEssentialMain.isWLoginEnable()) {
             if (Bukkit.getPlayer(playerName) != null) {
                 return WLogin.isInLoginList(playerName);
@@ -38,6 +38,11 @@ public class WPlayer {
             return Bukkit.getPlayer(playerName) != null;
         }
     }
+
+    public static boolean isOnline(String playerName){
+        return Bukkit.getPlayer(playerName) != null;
+    }
+
 
     public String playerName;
 
@@ -61,7 +66,7 @@ public class WPlayer {
 
     public WPlayer(String playerName) {
         this.playerName = playerName;
-        if (isOnline(playerName)) {
+        if (isLogin(playerName)) {
             playerList.add(this);
         }
     }
@@ -114,7 +119,7 @@ public class WPlayer {
 
                 @Override
                 public void run() {
-                    if (isOnline(player.getName())) {
+                    if (isLogin(player.getName())) {
                         if (WTeleport.isTeleporting(player)) {
                             if (timeLeft > 0) {
                                 player.sendMessage(timeLeft + WEssentialMain.languageConfig.getConfig().getString("message.time_left_teleport"));

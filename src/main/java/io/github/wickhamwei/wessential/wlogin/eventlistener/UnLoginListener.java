@@ -2,21 +2,25 @@ package io.github.wickhamwei.wessential.wlogin.eventlistener;
 
 import io.github.wickhamwei.wessential.WEssentialMain;
 import io.github.wickhamwei.wessential.wlogin.WLogin;
+import io.github.wickhamwei.wessential.wminors.WMinors;
 import io.github.wickhamwei.wessential.wtools.WPlayer;
 import io.github.wickhamwei.wessential.wtools.WTime;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.GameMode;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.event.player.*;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class UnLoginListener implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        if (WEssentialMain.isWLoginEnable() && !WPlayer.isOnline(event.getPlayer().getName())) {
+        event.getPlayer().setGameMode(GameMode.SPECTATOR);
+        if (WEssentialMain.isWLoginEnable() && !WPlayer.isLogin(event.getPlayer().getName())) {
             WPlayer player = WPlayer.getWPlayer(event.getPlayer().getName());
             if (WLogin.canLogin(player.getName())) {
                 if (!player.isRegister()) {
@@ -26,7 +30,9 @@ public class UnLoginListener implements Listener {
                     String oldIP = WEssentialMain.passwordConfig.getConfig().getString(player.getName() + "." + "IP");
                     if (WTime.getTimeDifferenceMinutes(WTime.getTime(), lastLoginTime) <= 20 && Objects.equals(oldIP, player.getIPAddress())) {
                         player.autoLogin();
+                        Bukkit.getServer().broadcastMessage(ChatColor.YELLOW + player.getName() + ChatColor.translateAlternateColorCodes('&', Objects.requireNonNull(WEssentialMain.languageConfig.getConfig().getString("message.player_join_msg"))));
                         player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.login_auto"));
+                        WMinors.checkMinors();
                     } else {
                         player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.login_not_login"));
                     }
@@ -37,7 +43,7 @@ public class UnLoginListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        if (WPlayer.isOnline(event.getPlayer().getName())) {
+        if (WPlayer.isLogin(event.getPlayer().getName())) {
             WPlayer player = WPlayer.getWPlayer(event.getPlayer().getName());
             player.recordUserIP();
         }
@@ -45,7 +51,7 @@ public class UnLoginListener implements Listener {
 
     @EventHandler
     public void stop(PlayerCommandPreprocessEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             String message = event.getMessage();
             String[] messageArray = message.split(" ");
             WPlayer player = WPlayer.getWPlayer(event.getPlayer().getName());
@@ -63,7 +69,7 @@ public class UnLoginListener implements Listener {
     @EventHandler
     public void stop(PlayerMoveEvent event) {
         WPlayer player = WPlayer.getWPlayer(event.getPlayer().getName());
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             if (!player.isRegister()) {
                 player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.login_not_register"));
             } else {
@@ -75,56 +81,56 @@ public class UnLoginListener implements Listener {
 
     @EventHandler
     public void stop(PlayerArmorStandManipulateEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void stop(PlayerBedEnterEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void stop(PlayerBedLeaveEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void stop(PlayerBucketEmptyEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void stop(AsyncPlayerChatEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void stop(PlayerDropItemEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void stop(PlayerInteractEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void stop(InventoryOpenEvent event) {
-        if (!WPlayer.isOnline(event.getPlayer().getName())) {
+        if (!WPlayer.isLogin(event.getPlayer().getName())) {
             event.setCancelled(true);
         }
     }

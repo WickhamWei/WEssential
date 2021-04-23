@@ -52,7 +52,7 @@ public class WTeleport {
         BukkitRunnable teleportBukkitRunnable = new BukkitRunnable() {
             @Override
             public void run() {
-                if (WPlayer.isOnline(player.getName())) {
+                if (WPlayer.isLogin(player.getName())) {
                     if (getCoolingTimeLeft(player) == 0) {
                         stopTeleportCooling(player);
                         cancel();
@@ -109,7 +109,7 @@ public class WTeleport {
 
             @Override
             public void run() {
-                if (WPlayer.isOnline(mainPlayer.getName()) && WPlayer.isOnline(targetPlayer.getName())) {
+                if (WPlayer.isLogin(mainPlayer.getName()) && WPlayer.isLogin(targetPlayer.getName())) {
                     if (WTeleport.isInRequest(mainPlayer) && WTeleport.isUnderRequest(targetPlayer)) {
                         if (timeLeftSecond == 0) {
                             stopTeleportRequest(mainPlayer, targetPlayer);

@@ -20,7 +20,7 @@ public class Register implements CommandExecutor {
             WPlayer player = WPlayer.getWPlayer(playerName);
             if (WEssentialMain.isWLoginEnable()) {
                 if (strings.length == 2) {
-                    if (WPlayer.isOnline(playerName) || player.isRegister()) {
+                    if (WPlayer.isLogin(playerName) || player.isRegister()) {
                         player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.login_already_register"));
                         return true;
                     } else {

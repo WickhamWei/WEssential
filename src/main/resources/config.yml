@@ -1,6 +1,6 @@
 # WEssential 配置文件
 # 配置文件版本号
-config_version: 1
+config_version: 1.0
 
 # WEssential 设置
 wessential_setting:
@@ -33,3 +33,8 @@ teleport_setting:
   # 最大额外家
   # 除了默认的床位置可以 /home 返回，其他的家的数量
   max_other_home: 1
+
+# 未成年保护设置
+minors_setting:
+  # 开启脏话屏蔽
+  enable_shield: true

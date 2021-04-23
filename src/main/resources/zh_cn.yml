@@ -1,6 +1,6 @@
 # zh_cn语言文件
 # 语言版本号
-language_version: 1
+language_version: 1.0
 # message是发送给玩家的信息，支持颜色代码‘&’
 message:
   player_join_msg: ' 加入了游戏'
@@ -54,6 +54,13 @@ message:
   w_protect_chest_select: '&e此箱子已被选中，可使用 /add <玩家名字> 添加用户'
   w_protect_chest_all_user: '&e此箱子除了您以外的用户有 '
   w_protect_chest_no_more_user: '&e此箱子除了您以外没有人能打开'
+  w_minors_set: '&e 已被设置为未成年人'
+  w_minors_unset: '&e 已被取消设置为未成年人'
+  w_minors_is_minors: '&e 是未成年人'
+  w_minors_not_minors: '&e 没有被设置为未成年人'
+  w_minors_list: '&e被设置为未成年人的玩家有：'
+  w_minors_list_null: '&e没有人被设置为未成年人'
+  w_minors_kick: '此时间是未成年游戏限制时间，请明天再来:)'
 # log是服务器后台信息，不支持颜色代码
 log:
   password_error: ' 密码输入错误'
