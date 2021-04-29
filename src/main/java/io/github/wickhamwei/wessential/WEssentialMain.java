@@ -39,7 +39,7 @@ public class WEssentialMain extends JavaPlugin {
     public static WConfig residenceConfig;
 
     public static final String ConfigVersion = "1.0";
-    public static final String languageVersion = "1.1";
+    public static final String languageVersion = "1.2";
     public static final String url = "https://api.github.com/repos/WickhamWei/WEssential/releases/latest";
 
     @Override

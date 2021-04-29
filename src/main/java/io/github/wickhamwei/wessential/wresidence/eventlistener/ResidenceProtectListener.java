@@ -11,42 +11,39 @@ import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 
 public class ResidenceProtectListener implements Listener {
-//    @EventHandler
-//    public void onPlayerMove(PlayerMoveEvent event) {
-//        WPlayer player = WPlayer.getWPlayer(event.getPlayer().getName());
-//        if (WPlayer.isLogin(event.getPlayer().getName())) {
-//            String[] residence = WResidence.getResidence(player.getLocation(), true);
-//            if (residence != null) {
-//                player.sendMessage(residence[0] + " " + residence[1]);
-//                event.setCancelled(true);
-//            }
-//        }
-//    }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        if (WResidence.isStopEventInResidence(WPlayer.getWPlayer(event.getPlayer().getName()), event.getBlock())) {
+        if (WResidence.isBlockInResidence(WPlayer.getWPlayer(event.getPlayer().getName()), event.getBlock(), false)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockPlace(BlockPlaceEvent event) {
-        if (WResidence.isStopEventInResidence(WPlayer.getWPlayer(event.getPlayer().getName()), event.getBlockPlaced())) {
+        if (WResidence.isBlockInResidence(WPlayer.getWPlayer(event.getPlayer().getName()), event.getBlockPlaced(), false)) {
             event.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onBlockFire(BlockIgniteEvent event) {
-        if (WResidence.isStopEventInResidence(event.getBlock(), true)) {
-            event.setCancelled(true);
+        // 允许领地拥有者手动点火
+        // 是不是手动点火
+        if (event.getCause() == BlockIgniteEvent.IgniteCause.FLINT_AND_STEEL && event.getPlayer() != null) {
+            if (WResidence.isBlockInResidence(WPlayer.getWPlayer(event.getPlayer().getName()), event.getBlock(), true)) {
+                event.setCancelled(true);
+            }
+        } else {
+            if (WResidence.isBlockInResidence(event.getBlock(), true)) {
+                event.setCancelled(true);
+            }
         }
     }
 
     @EventHandler
     public void onBlockFire(BlockBurnEvent event) {
-        if (WResidence.isStopEventInResidence(event.getBlock(), true)) {
+        if (WResidence.isBlockInResidence(event.getBlock(), true)) {
             event.setCancelled(true);
         }
     }

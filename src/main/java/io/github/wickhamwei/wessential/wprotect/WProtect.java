@@ -5,9 +5,12 @@ import io.github.wickhamwei.wessential.wtools.WPlayer;
 import io.github.wickhamwei.wessential.wtools.WTime;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.block.*;
+import org.bukkit.block.data.type.WallSign;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.InventoryHolder;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -15,37 +18,44 @@ import java.util.Objects;
 import java.util.Set;
 
 public class WProtect {
-    public static boolean lockChest(WPlayer player, Block chestBlock) {
-        if (chestBlock.getType() == Material.CHEST) {   // 判断是否是箱子
-            String chestOwnerName = getChestOwnerName(chestBlock);
-            if (chestOwnerName == null) {  // 判断是否被锁上
-                String playerName = player.getName();
-                String world = Objects.requireNonNull(chestBlock.getLocation().getWorld()).getName();
-                double X = Math.floor(chestBlock.getLocation().getX());
-                double Y = Math.floor(chestBlock.getLocation().getY());
-                double Z = Math.floor(chestBlock.getLocation().getZ());
-                long time = WTime.getTime();
-                WEssentialMain.chestProtectConfig.getConfig().set(playerName + "." + time + ".world", world);
-                WEssentialMain.chestProtectConfig.getConfig().set(playerName + "." + time + ".X", X);
-                WEssentialMain.chestProtectConfig.getConfig().set(playerName + "." + time + ".Y", Y);
-                WEssentialMain.chestProtectConfig.getConfig().set(playerName + "." + time + ".Z", Z);
-                WEssentialMain.chestProtectConfig.saveConfig();
-                return true;
-            } else if (chestOwnerName.equals(player.getName())) {
-                player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_already_lock_by_you"));
-                setLastChest(player.getName(), chestBlock);
-                player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_select"));
-                Set<String> moreUsers = WProtect.getMoreUsers(chestBlock);
-                if (moreUsers.size() != 0) {
-                    player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_all_user") + moreUsers);
-                } else {
-                    player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_no_more_user"));
-                }
-            } else {
-                player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_already_lock"));
-            }
+    public static void lockChest(WPlayer player, Block chestBlock, Block signBlock,BlockFace signFace) {
+        signBlock.setType(Material.OAK_WALL_SIGN);
+        Objects.requireNonNull(signBlock.getLocation().getWorld()).playSound(signBlock.getLocation(), Sound.BLOCK_WOOD_PLACE, 1, 0);
+        Sign targetBlockStateSign = (Sign) signBlock.getState();
+        WallSign targetBlockStateBlockDataWallSign = (WallSign) targetBlockStateSign.getBlockData();
+        targetBlockStateBlockDataWallSign.setFacing(signFace);
+        targetBlockStateSign.setLine(0, "[WProtect]已上锁");
+        targetBlockStateSign.setLine(1, player.getName());
+        targetBlockStateSign.setBlockData(targetBlockStateBlockDataWallSign);
+        targetBlockStateSign.update();
+
+        ItemStack playerMainHand = player.getBukkitPlayer().getInventory().getItemInMainHand();
+        playerMainHand.setAmount(playerMainHand.getAmount() - 1);
+        player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_lock"));
+
+        String playerName = player.getName();
+        String world = Objects.requireNonNull(chestBlock.getLocation().getWorld()).getName();
+        double X = Math.floor(chestBlock.getLocation().getX());
+        double Y = Math.floor(chestBlock.getLocation().getY());
+        double Z = Math.floor(chestBlock.getLocation().getZ());
+        long time = WTime.getTime();
+        WEssentialMain.chestProtectConfig.getConfig().set(playerName + "." + time + ".world", world);
+        WEssentialMain.chestProtectConfig.getConfig().set(playerName + "." + time + ".X", X);
+        WEssentialMain.chestProtectConfig.getConfig().set(playerName + "." + time + ".Y", Y);
+        WEssentialMain.chestProtectConfig.getConfig().set(playerName + "." + time + ".Z", Z);
+        WEssentialMain.chestProtectConfig.saveConfig();
+    }
+
+    public static void ownerClickChest(WPlayer owner, Block chestBlock) {
+        owner.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_already_lock_by_you"));
+        setLastChest(owner.getName(), chestBlock);
+        owner.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_select"));
+        Set<String> moreUsers = WProtect.getMoreUsers(chestBlock);
+        if (moreUsers.size() != 0) {
+            owner.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_all_user") + moreUsers);
+        } else {
+            owner.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_no_more_user"));
         }
-        return false;
     }
 
     public static String getChestOwnerName(Block chestBlock) { // 判断是否被锁上
@@ -68,26 +78,6 @@ public class WProtect {
     }
 
     private static String getChestOwnerNameInChestBlock(Chest chestBlock) {
-
-//        // 先找牌子
-//        BlockFace[] around = {BlockFace.EAST, BlockFace.SOUTH, BlockFace.WEST, BlockFace.NORTH};
-//        for (BlockFace blockFace : around) {
-//            if (chestBlock.getBlock().getRelative(blockFace).getType() == Material.OAK_WALL_SIGN) {
-//                Block sign = chestBlock.getBlock().getRelative(blockFace);
-//                if (sign.getState() instanceof Sign) {
-//                    Sign signBlockState = (Sign) sign.getState();
-//                    if (signBlockState.getLine(0).equals("[WProtect]已上锁")) {
-//                        if (isLockInDatabase(WPlayer.getWPlayer(signBlockState.getLine(1)), chestBlock.getLocation())) {
-//                            return signBlockState.getLine(1);
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return null;
-
-        // 不找牌子，直接遍历
-
         Location chestLocation = chestBlock.getLocation();
         Set<String> playerNames = new HashSet<>();
         ConfigurationSection nameConfigSection = WEssentialMain.chestProtectConfig.getConfig().getConfigurationSection("");
@@ -114,26 +104,6 @@ public class WProtect {
         }
         return null;
     }
-
-//    private static boolean isLockInDatabase(WPlayer player, Location chestLocation) {
-//        Set<String> times = new HashSet<>();
-//        ConfigurationSection configurationSection = WEssentialMain.wProtectConfig.getConfig().getConfigurationSection(player.getName());
-//        if (configurationSection != null) {
-//            times = configurationSection.getKeys(false);
-//        }
-//        for (String time : times) {
-//            if (Objects.requireNonNull(chestLocation.getWorld()).getName().equals(WEssentialMain.wProtectConfig.getConfig().getString(player.getName() + "." + time + "." + "world"))) {
-//                if (Math.floor(chestLocation.getX()) == WEssentialMain.wProtectConfig.getConfig().getDouble(player.getName() + "." + time + "." + "X")) {
-//                    if (Math.floor(chestLocation.getY()) == WEssentialMain.wProtectConfig.getConfig().getDouble(player.getName() + "." + time + "." + "Y")) {
-//                        if (Math.floor(chestLocation.getZ()) == WEssentialMain.wProtectConfig.getConfig().getDouble(player.getName() + "." + time + "." + "Z")) {
-//                            return true;
-//                        }
-//                    }
-//                }
-//            }
-//        }
-//        return false;
-//    }
 
     public static boolean unlockChest(Block chestBlock) {
         int lockNumber = 0;

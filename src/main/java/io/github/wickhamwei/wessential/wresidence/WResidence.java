@@ -40,7 +40,7 @@ public class WResidence {
         WEssentialMain.residenceConfig.saveConfig();
     }
 
-    public static String[] getLocalResidence(Location targetLocation, boolean isPlayer, boolean isFire) {
+    public static String[] getResidenceOwnerAndName(Location targetLocation, boolean isPlayer, boolean isFire) {
         Set<String> playerNames = new HashSet<>();
         ConfigurationSection nameConfigSection = WEssentialMain.residenceConfig.getConfig().getConfigurationSection("");
         if (nameConfigSection != null) {
@@ -65,7 +65,7 @@ public class WResidence {
         return null;
     }
 
-    public static Set<String> getResidence(WPlayer player) {
+    public static Set<String> getAllResidence(WPlayer player) {
         Set<String> residenceNames = new HashSet<>();
         ConfigurationSection residenceConfigSection = WEssentialMain.residenceConfig.getConfig().getConfigurationSection(player.getName());
         if (residenceConfigSection != null) {
@@ -91,14 +91,18 @@ public class WResidence {
         double y = targetLocation.getY();
         double z = targetLocation.getZ();
 
+        if (isFire) {
+            if ((y <= y2 + 1 && y >= y1 - 1) || (y >= y2 - 1 && y <= y1 + 1)) {
+                if ((x <= x2 + 1 && x >= x1 - 1) || (x >= x2 - 1 && x <= x1 + 1)) {
+                    return (z <= z2 + 1 && z >= z1 - 1) || (z >= z2 - 1 && z <= z1 + 1);
+                }
+            }
+        }
+
         if ((y <= y2 && y >= y1) || (y >= y2 && y <= y1)) {
             if (isPlayer) {
                 if ((x <= x2 + 1 && x >= x1) || (x >= x2 && x <= x1 + 1)) {
                     return (z <= z2 + 1 && z >= z1) || (z >= z2 && z <= z1 + 1);
-                }
-            } else if (isFire) {
-                if ((x <= x2 + 1 && x >= x1 - 1) || (x >= x2 - 1 && x <= x1 + 1)) {
-                    return (z <= z2 + 1 && z >= z1 - 1) || (z >= z2 - 1 && z <= z1 + 1);
                 }
             } else {
                 if ((x <= x2 && x >= x1) || (x >= x2 && x <= x1)) {
@@ -109,9 +113,9 @@ public class WResidence {
         return false;
     }
 
-    public static boolean isStopEventInResidence(WPlayer player, Block targetBlock) {
+    public static boolean isBlockInResidence(WPlayer player, Block targetBlock, boolean isFire) {
         if (WPlayer.isLogin(player.getName())) {
-            String[] residence = WResidence.getLocalResidence(targetBlock.getLocation(), false, false);
+            String[] residence = WResidence.getResidenceOwnerAndName(targetBlock.getLocation(), false, isFire);
             if (residence != null) {
                 if (!residence[0].equals(player.getName())) {
                     player.sendMessage("&c" + residence[0] + " " + residence[1] + WEssentialMain.languageConfig.getConfig().getString("message.w_residence_disable_event"));
@@ -122,8 +126,8 @@ public class WResidence {
         return false;
     }
 
-    public static boolean isStopEventInResidence(Block targetBlock, boolean isFire) {
-        String[] residence = WResidence.getLocalResidence(targetBlock.getLocation(), false, isFire);
+    public static boolean isBlockInResidence(Block targetBlock, boolean isFire) {
+        String[] residence = WResidence.getResidenceOwnerAndName(targetBlock.getLocation(), false, isFire);
         return residence != null;
     }
 }

@@ -1,17 +1,13 @@
 package io.github.wickhamwei.wessential.wresidence.command;
 
 import io.github.wickhamwei.wessential.WEssentialMain;
-import io.github.wickhamwei.wessential.wprotect.WProtect;
 import io.github.wickhamwei.wessential.wresidence.WResidence;
 import io.github.wickhamwei.wessential.wtools.WPlayer;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.Objects;
 import java.util.Set;
 
 public class ResList implements CommandExecutor {
@@ -21,7 +17,7 @@ public class ResList implements CommandExecutor {
             String playerName = commandSender.getName();
             WPlayer player = WPlayer.getWPlayer(playerName);
             if (strings.length == 0) {
-                Set<String> allResidence = WResidence.getResidence(player);
+                Set<String> allResidence = WResidence.getAllResidence(player);
                 if (allResidence.size() != 0) {
                     player.sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_residence_all") + allResidence);
                 } else {

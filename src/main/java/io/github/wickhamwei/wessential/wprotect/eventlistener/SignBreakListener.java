@@ -23,7 +23,7 @@ public class SignBreakListener implements Listener {
                 if (targetBlock.getRelative(targetBlockStateBlockDataWallSign.getFacing().getOppositeFace()).getType() == Material.CHEST) {
                     Block chestBlock = targetBlock.getRelative(targetBlockStateBlockDataWallSign.getFacing().getOppositeFace());
                     String chestOwnerName = WProtect.getChestOwnerName(chestBlock);
-                    if (chestOwnerName != null) {
+                    if (chestOwnerName != null && signBlockState.getLine(1).equals(chestOwnerName)) {
                         if (!e.getPlayer().getName().equals(chestOwnerName)) {
                             e.setCancelled(true);
                             WPlayer.getWPlayer(e.getPlayer().getName()).sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_not_owner") + chestOwnerName);
@@ -32,6 +32,10 @@ public class SignBreakListener implements Listener {
                                 WPlayer.getWPlayer(e.getPlayer().getName()).sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_chest_unlock"));
                             }
                         }
+                    }
+                    // 数据库未找到数据：有可能是用户手写的牌子，也有可能是数据文件被删除
+                    if (!signBlockState.getLine(1).equals(chestOwnerName)) {
+                        WPlayer.getWPlayer(e.getPlayer().getName()).sendMessage(WEssentialMain.languageConfig.getConfig().getString("message.w_protect_sign_unknown"));
                     }
                 }
             }
