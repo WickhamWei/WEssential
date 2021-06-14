@@ -1,10 +1,13 @@
 # WEssential
 
-轻量化的类Essential插件，作者 Wickham阿华。
+轻量化的类 Essential 插件，作者 Wickham阿华。  
+支持 Spigot 服务端和 [Mohist 服务端](https://mohistmc.com/download/)
+
+支持 Minecraft 1.17
 
 ### 意见与建议
 
-如果有想要的功能、想改进的功能或者待修复的Bug，请随意向此项目发起Issue。
+如果有想要的功能、想改进的功能或者待修复的 Bug，请随意向此项目发起 Issue。
 
 ## 功能及指令
 
@@ -169,7 +172,7 @@
 
 ### 正式版
 
-本页面右边或下面的 Releases 可以下载到正式版
+本页面右边或下面的 [Releases](https://github.com/WickhamWei/WEssential/releases) 可以下载到正式版
 
 ### 测试版
 
